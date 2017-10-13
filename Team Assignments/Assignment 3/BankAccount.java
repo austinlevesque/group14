@@ -2,34 +2,32 @@ public class BankAccount{
     
     double balance;
     Customer accountHolder;
-
-    /*
+    BankAccount copy = new BankAccount();
+    
     //default constructor
     public BankAccount(){
-        
+        balance = 0;
+        accountHolder = null;
     }
-    */
-	
-	//constructor
-	public BankAccount(){
-		
-	}
-	
+    
+    public Customer getAccountHolder() {
+        return accountHolder;
+    }
+    /*
 	public BankAccount(Customer acc){
         accountHolder = acc;
     }
+    */
 	
     public BankAccount(double bal, Customer acc){
         balance = bal;
         accountHolder = acc;
     }
     
-    /*
     //copy constructor
     public BankAccount(BankAccount accountToCopy){
-        
+        copy = accountToCopy;
     }
-    */
     
     //methods
     public double getBalance(){     //returns object balance
@@ -65,8 +63,10 @@ public class BankAccount{
     
     public static void main(String[] args) {
         //Would require constructors which get declined by the test class
-		//BankAccount b1 = new BankAccount(100.0, 20.0);    //bank account object named 'b1'
-		BankAccount b = new BankAccount(new Customer("test1", 1));
+        
+        /*//BankAccount b1 = new BankAccount(100.0, 20.0);    //bank account object named 'b1'
+        BankAccount b = new BankAccount(new Customer("test1", 1));
+        */
 		/*
         BankAccount b2 = new BankAccount(6000.0);   //bank account object named 'b2'    
         System.out.println("Bank Account 1 balance: $" +b1.getBalance()+"\nBank Account 2 balance: $"+b2.getBalance());
