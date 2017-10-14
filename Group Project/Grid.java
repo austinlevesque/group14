@@ -10,11 +10,12 @@ public class Grid {
 
   int x = 9;
   int y = 9;
-  int foodX;
-  int foodY;
+  int foodX = 5;
+  int foodY = 5;
   String input;
   int yLength = 10;
   int xLength = 10;
+  int score;
 
 /**
  * Prints the Grid for the Snake to move on.
@@ -22,13 +23,21 @@ public class Grid {
  * @return void
  */
 
+public int gameScore() {
+  if (checkFood() == false) {
+    setScore(getScore()+1);
+  }
+  return getScore();
+}
+
 public void printGrid() {
+  System.out.println("Game Score: " + getScore());
   String[][] arrayGrid = new String[getYlength()][getXlength()];
   for(int row = 0; row < getXlength(); row++) {
     for(int column = 0; column < getYlength(); column++) {
         arrayGrid[row][column] = ". ";
-        arrayGrid[getY()][getX()] = "S ";
         arrayGrid[getFoodY()][getFoodX()] = "* ";
+        arrayGrid[getY()][getX()] = "S ";
         System.out.print(arrayGrid[row][column]);
     }
     System.out.println();
@@ -43,13 +52,39 @@ public void printGrid() {
  */
 
 public void generateFood() {
-  Random randX = new Random();
-  Random randY = new Random();
-  setFoodX(randX.nextInt(xLength));
-  setFoodY(randY.nextInt(yLength));
+
+  while (checkFood() == false) {
+    Random randX = new Random();
+    Random randY = new Random();
+    setFoodX(randX.nextInt(xLength));
+    setFoodY(randY.nextInt(yLength));
+  }
 }
 
+/**
+ * Checks for food on grid.
+ *
+ * @return boolean
+ */
 
+ public boolean checkFood() {
+   boolean flag = true;
+    if (getFoodY() == getY() && getFoodX() == getX()) {
+      flag = false;
+    }
+    return flag;
+ }
+
+ /**
+  * Generates more "s" body parts when it eats "*"
+  *
+  * @return
+  */
+
+ public void generateBody() {
+   if (checkFood() == false) {
+   }
+ }
 
 /**
  * Prompts user for movement of the snake in any direction according to "a", "s", "w" and "d".
@@ -112,7 +147,6 @@ public void moveSnake() {
         }
       setX(moveX);
     }
-
 }
 
 /**
@@ -169,6 +203,11 @@ public void setFoodY(int y) {
   foodY = y;
 }
 
+public int getScore() {
+  return score;
+}
 
-
+public void setScore(int scoreToSet) {
+  score = scoreToSet;
+}
 }
