@@ -1,90 +1,109 @@
+/**
+ * Main Operating Class.
+ */
+
 import java.util.Scanner;
 
 public class Grid {
 
-int x = 0;
-int y = 0;
+  int x = 5;
+  int y = 5;
+  String input;
+
+/**
+ * Prints the Grid for the Snake to move on.
+ *
+ * @return void
+ */
 
 public void printGrid() {
   String[][] arrayGrid = new String[10][10];
-
-  for(int row = 0; row < 10; row++)
-  {
-    for(int column = 0; column < 10; column++)
-    {
+  for(int row = 0; row < 10; row++) {
+    for(int column = 0; column < 10; column++) {
         arrayGrid[row][column] = ". ";
-        
-        arrayGrid[getX()][getY()] = "S ";
-
+        arrayGrid[getY()][getX()] = "S ";
         System.out.print(arrayGrid[row][column]);
     }
     System.out.println();
-    
   }
 }
 
+/**
+ * Prompts user for movement of the snake in any direction according to "a", "s", "w" and "d".
+ * Checks if user input is a valid key for movement.
+ * 
+ * @return boolean
+ */
+
 public boolean userInput() {
-    boolean valid = false; 
-    while (valid == false) {    
+    boolean valid = false;
+    while (valid == false) {
         Scanner keyboard = new Scanner(System.in);
         System.out.println("movement: ");
-        String rawInput = keyboard.nextLine();
-        inputValid(rawInput);
-        valid = true;
-    
-    }
-    moveSnake(rawInput);
-    return valid;
-
-}
-
-public boolean inputValid(String rawInput) {
-        System.out.println(rawInput);   
-        boolean valid = false;
-        if (rawInput.equals("w") || rawInput.equals("a") ||rawInput.equals("s") ||rawInput.equals("d")) {
-            valid = true;    
-        } 
+        setInput(keyboard.nextLine());
+        if (input.equals("w") || input.equals("a") ||input.equals("s") ||input.equals("d")) {
+            valid = true;
+        }
         else {
         System.out.println("false");
-        userInput();
         }
-        moveSnake(rawInput);
-
-    return valid;
+      }
+      return valid;
+    
 }
+
+public void moveSnake() {
+    int moveY = getY();
+    int moveX = getX();
+
+    if (input.equals("w")) {
+      moveY--;
+      setY(moveY);
+    }
+    else if (input.equals("s")) {
+      moveY++;
+      setY(moveY);
+    }
+    else if (input.equals("a")) {
+      moveX--;
+      setX(moveX);
+    }
+    else if (input.equals("d")) {
+      moveX++;
+      setX(moveX);
+    }
+
+}
+
+/**
+ * getter/setter methods
+ *
+ * @return int
+ * @return void
+ */
+
 public int getX() {
-    return this.x;
+    return x;
 }
 
 public int getY() {
-    return this.y;
+    return y;
 }
 
-public int setX(int sx) {
+public void setX(int sx) {
     x = sx;
-    return this.x; 
 }
 
-public int setY(int sy) {
+public void setY(int sy) {
     y = sy;
-    return this.y;
-} 
-
-public void moveSnake(String rawInput) {
-    if (rawInput.equals("w")) {
-        setX(getX + 1);        
-        printGrid();    
-    }
 }
-/*
-public static setX(String rawInput) {
-    if (rawInput.equals("w")) {
-        x -= 1;
-    if (rawInput.equals("S")) {
 
-    
-}*/
+public String getInput() {
+  return input;
+}
 
-
+public void setInput(String s) {
+  input = s;
+}
 
 }
