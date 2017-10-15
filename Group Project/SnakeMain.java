@@ -22,5 +22,6 @@ public class SnakeMain {
             newGrid.printGrid();
 			gameover = newGrid.gameover;
         }
+		System.out.println("Game Over.");
     }
 }
