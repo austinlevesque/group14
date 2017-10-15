@@ -70,7 +70,13 @@ public class Grid{
 			arrayGrid[getFoodY()][getFoodX()] = "* ";
 			arrayGrid[getY()][getX()] = "S ";
 			for(int j = tailX.size(); j>0; j--){
-				arrayGrid[(tailY.get(j-1))][tailX.get(j-1)] = "s ";
+			//draws the tail and detects if the head has collided with the tail
+				if(arrayGrid[(tailY.get(j-1))][tailX.get(j-1)] == "S "){
+				//if the head has collided with the tail
+					this.gameover = true;
+				}else{
+					arrayGrid[(tailY.get(j-1))][tailX.get(j-1)] = "s ";
+				}
 			}
 			System.out.print(arrayGrid[row][column]);
 		}
@@ -182,18 +188,21 @@ public class Grid{
 			}
 		  setX(moveX);
 		}else{
-			quit();
+			this.gameover = true;
 		}
 		System.out.println("Head Position:"+moveX+","+moveY);
 	}
 
 	/**
 	* Quits the game when called in moveSnake() after the user inputs the character 'q'
+	* Removed and added its functionality to main class
 	*/
+	/*
 	public void quit(){
 		System.out.println("Quitting game.");
 		this.gameover = true;
 	}
+	*/
 
 	/**
 	* getter/setter methods
