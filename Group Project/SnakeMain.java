@@ -11,16 +11,16 @@
 public class SnakeMain {
 
     public static void main(String[] args){
-        boolean gameOver = false;
+        boolean gameover = false;
         Grid newGrid = new Grid();
         newGrid.printGrid();
-        while (gameOver == false) {
+        while (gameover == false){
             newGrid.userInput();
             newGrid.moveSnake();
             newGrid.gameScore();
             newGrid.generateFood();
             newGrid.printGrid();
-
+			gameover = newGrid.gameover;
         }
     }
 }
