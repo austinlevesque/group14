@@ -20,8 +20,8 @@ public class Grid{
 	int foodX = 5;
 	int foodY = 5;
 	String input;
-	int yLength = 10;
 	int xLength = 10;
+	int yLength = 10;
 	int score;
 	int tail = 0;
 	boolean gameover = false;
