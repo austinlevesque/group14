@@ -59,6 +59,7 @@ public class Grid{
 	/**
 	* Prints the Grid for the Snake to move on.
 	*
+	* Grid generation taken from  http://www.dreamincode.net/forums/topic/233382-2-d-array-grid-design/
 	* @return void
 	*/
 	public void printGrid(){
