@@ -2,13 +2,14 @@ public class BankAccount{
     
     double balance;
     Customer accountHolder;
-    
+	BankAccount account;
+	
     //default constructor
 	public BankAccount(){
 	}
     
 	public BankAccount(Customer acc){
-        accountHolder = acc;
+        accountHolder = new Customer(acc);
     }
 	
     public BankAccount(double bal, Customer acc){
@@ -17,8 +18,8 @@ public class BankAccount{
     }
     
     //copy constructor
-    public BankAccount(BankAccount accountToCopy){
-        setBalance(accountToCopy.balance);
+    BankAccount(BankAccount accountToCopy){
+		setBalance(accountToCopy.balance);
     }
     
     //methods
