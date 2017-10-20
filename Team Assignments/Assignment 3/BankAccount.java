@@ -1,52 +1,85 @@
 public class BankAccount{
     
+    //variables
     double balance;
     Customer accountHolder;
-	BankAccount account;
+    BankAccount account;
 	
-    //default constructor
-	public BankAccount(){
-	}
+    //Constructors
+    /** Default constructor
+    * takes no arguments and runs no lines of code
+    */
+    public BankAccount(){
+    }
     
-	public BankAccount(Customer acc){
+    /** Customer constructor
+    * @param acc - A Customer object that takes the same (String,ID) parameters that the class requires
+    *
+    */
+    public BankAccount(Customer acc){
         accountHolder = new Customer(acc);
     }
 	
+    /** Full constructor
+    * @param bal - double balance that declares the initial balance of the BankAccount when it's created
+    * @param acc - Customer object taking (String,ID)
+    */
     public BankAccount(double bal, Customer acc){
         balance = bal;
         accountHolder = acc;
     }
     
-    //copy constructor
+    /** Copy Constructor
+    * @param accountToCopy - BankAccount object to copy
+    */
     BankAccount(BankAccount accountToCopy){
 		setBalance(accountToCopy.balance);
     }
     
     //methods
-    public double getBalance(){     //returns object balance
+    /**
+    * @returns the balance of the object as a double
+    */
+    public double getBalance(){
         return balance;
     }
-	
-	public void setBalance(double bal){
+
+	/**
+	* @param bal - double balance that you want to change the new balance to
+	* @returns void (nothing)
+	*/
+    public void setBalance(double bal){
 		this.balance = bal;
-	}
+    }
 	
+	/**
+	* @returns accountHolder - the accountHolder customer object of the bankaccount object
+	*/
 	public Customer getAccountHolder() {
         return accountHolder;
     }
     
-    public double deposit(double amount) {      //takes an amount and adds that to the bank account it's called with
-        //balance += amount;
-        //double b = this.getBalance();
+	/** takes an amount and adds that to the bank account it's called with
+	* @param amount - double that you wish to deposit into the account
+	* @returns the balance + the amount (as a double) inputted when the method is called
+	*/
+    public double deposit(double amount) {
         if(amount<0){ //if a negative number is deposited
             return 0; //deposit nothing
         }
         return ((this.balance)+=amount);   
     } 
 
-    public double withdraw (double amount) {    //takes an amount and removes that from the bank account it's called with
-        if(amount>this.getBalance()){ //if withdrawing more money than held
-            return this.getBalance(); //gives as much as possible without overdrawing
+	/** takes an amount and removes that from the bank account it's called with
+	* @param amount - double that you wish to withdraw
+	* @returns all of the money in the bank account if you try to overdraw
+	* @returns the amount in the bank account - the amount you withdraw
+	*/
+    public double withdraw (double amount) {
+        if(amount>this.getBalance()){ 
+		//if withdrawing more money than held
+            return this.getBalance(); 
+			//gives as much as possible without overdrawing
         }
         return ((this.balance)-=amount);
     }
