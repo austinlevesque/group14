@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.Random;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +30,10 @@ public class Snake{
 	List<Integer> tailY = new ArrayList<Integer>();
 	
 
+	//Constructors
+	public Snake(){
+	}
+	
 	public Snake(int scr){
 		score = scr;
 	}
@@ -203,4 +206,12 @@ public class Snake{
 	public void setFoodY(int y){
 	  foodY = y;
 	}
+	
+	public int getScore(){
+	  	  return score;
+  	}
+
+  	public void setScore(int scoreToSet){
+  	  score = scoreToSet;
+  	}
 }
