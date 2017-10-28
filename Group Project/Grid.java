@@ -2,6 +2,18 @@ import java.util.Random;
 
 public class Grid{
 	
+	int score;
+	Snake mainSnake;
+	
+	//Constructors
+	public Grid(){
+	}
+	
+	public Grid(Snake main,int scr){
+		mainSnake = main;
+		score = scr;
+	}
+	
 	/**
 	* Prints the Grid for the Snake to move on.
 	*
@@ -10,19 +22,19 @@ public class Grid{
 	*/
 	public void printGrid(){
 	  System.out.println("Game Score: " + getScore());
-	  String[][] arrayGrid = new String[getYlength()][getXlength()];
-	  for(int row = 0; row < getXlength(); row++){
-		for(int column = 0; column < getYlength(); column++){
+	  String[][] arrayGrid = new String[mainSnake.getYlength()][mainSnake.getXlength()];
+	  for(int row = 0; row < mainSnake.getXlength(); row++){
+		for(int column = 0; column < mainSnake.getYlength(); column++){
 			arrayGrid[row][column] = ". ";
-			arrayGrid[getFoodY()][getFoodX()] = "* ";
-			arrayGrid[getY()][getX()] = "S ";
-			for(int j = tailX.size(); j>0; j--){
+			arrayGrid[mainSnake.getFoodY()][mainSnake.getFoodX()] = "* ";
+			arrayGrid[mainSnake.getY()][mainSnake.getX()] = "S ";
+			for(int j = mainSnake.tailX.size(); j>0; j--){
 			//draws the tail and detects if the head has collided with the tail
-				if(arrayGrid[(tailY.get(j-1))][tailX.get(j-1)] == "S "){
+				if(arrayGrid[(mainSnake.tailY.get(j-1))][mainSnake.tailX.get(j-1)] == "S "){
 				//if the head has collided with the tail
-					this.gameover = true;
+					mainSnake.gameover = true;
 				}else{
-					arrayGrid[(tailY.get(j-1))][tailX.get(j-1)] = "s ";
+					arrayGrid[(mainSnake.tailY.get(j-1))][mainSnake.tailX.get(j-1)] = "s ";
 				}
 			}
 			System.out.print(arrayGrid[row][column]);
@@ -41,17 +53,25 @@ public class Grid{
 	  while (checkFood() == false){
 		Random randX = new Random();
 		Random randY = new Random();
-		setFoodX(randX.nextInt(xLength));
-		setFoodY(randY.nextInt(yLength));
+		mainSnake.setFoodX(randX.nextInt(mainSnake.xLength));
+		mainSnake.setFoodY(randY.nextInt(mainSnake.yLength));
 	  }
 	}
 	
-	public static boolean checkFood(){
+	public boolean checkFood(){
 		boolean flag = true;
-		if (getFoodY() == getY() && getFoodX() == getX()){
+		if (mainSnake.getFoodY() == mainSnake.getY() && mainSnake.getFoodX() == mainSnake.getX()){
 			flag = false;
 		}
 		return flag;
 	}
+	
+	public int getScore(){
+	  	  return score;
+  	}
+
+  	public void setScore(int scoreToSet){
+  	  score = scoreToSet;
+  	}
 	
 }
