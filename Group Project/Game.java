@@ -14,10 +14,10 @@ public class Game{
 	/**
 	 * Runs the game until the game is over or the user quits.
 	 */
-    public void main(String[] args){
+    public static void main(String[] args){
         boolean gameover = false;
-        Grid gameGrid = new Grid();
         Snake mainSnake = new Snake(score);
+        Grid gameGrid = new Grid(mainSnake,score);
         gameGrid.printGrid();
         while (gameover == false){
         	mainSnake.userInput();
