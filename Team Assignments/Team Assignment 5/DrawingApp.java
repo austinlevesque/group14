@@ -22,7 +22,7 @@ public class DrawingApp extends JFrame implements KeyListener {
 	public static final int WINDOW_HEIGHT = 1000;
 	public static final int DEFAULT_CIRCLE_SIZE = 100;
 
-	private ArrayList<Circle> circles = new ArrayList<Circle>();
+	private ArrayList<Shape> circles = new ArrayList<Shape>();
 
     /**
      * Creates the window that users can use to draw circles.
@@ -32,8 +32,13 @@ public class DrawingApp extends JFrame implements KeyListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         // put one circle in the list to get it started.
-				Circle aCircle = new Circle(DEFAULT_CIRCLE_SIZE);
-				circles.add(aCircle);
+		Point temp = new Point(0,0);
+		Point temp1 = new Point(700,0);
+		Circle aCircle = new Circle(temp, DEFAULT_CIRCLE_SIZE);
+		Square aSquare = new Square(temp1, DEFAULT_CIRCLE_SIZE);
+		circles.add(aCircle);
+		circles.add(aSquare);
+
 		// The following three windows are needed to listen to keyboard events.
 		// We need the focus in our content pane in our window to ensure we are informed of keyboard
 		// events.
@@ -60,7 +65,7 @@ public class DrawingApp extends JFrame implements KeyListener {
 	 * be re-drawn.
 	 */
     public void timerAction(){
-		for (Circle c : circles) {
+		for (Shape c : circles) {
 			c.moveDown(10);
 		}
 		repaint();
@@ -76,7 +81,7 @@ public class DrawingApp extends JFrame implements KeyListener {
         // start drawing.
         super.paint(canvas);
 
-        for (Circle c : circles) {
+        for (Shape c : circles) {
         	c.draw(canvas);
         }
     }
@@ -95,55 +100,58 @@ public class DrawingApp extends JFrame implements KeyListener {
 			System.out.println("C");
 			circles.add(new Circle(randomNum(), DEFAULT_CIRCLE_SIZE));
 			break;
+		case 'S':
+			System.out.println("S");
+			circles.add(new Square(randomNum(), DEFAULT_CIRCLE_SIZE));
+			break;
 		case KeyEvent.VK_LEFT:
 			System.out.println("left");
 			int a = 0;
-			for(Circle tempC: circles){
-				objectC(a).moveLeft(30);
+			for(Shape move: circles) {
+				objectShape(a).moveLeft(30);
 				a++;
 			}
 			break;
 		case KeyEvent.VK_RIGHT:
 			System.out.println("right");
 			int b = 0;
-			for(Circle tempC: circles){
-				objectC(b).moveRight(30);
+			for(Shape move: circles) {
+				objectShape(b).moveRight(30);
 				b++;
 			}
 			break;
 		case KeyEvent.VK_UP:
 			System.out.println("up");
 			int c = 0;
-			for(Circle tempC: circles){
-				objectC(c).moveUp(30);
+			for(Shape move: circles) {
+				objectShape(c).moveUp(30);
 				c++;
 			}
 			break;
 		case KeyEvent.VK_DOWN:
 			System.out.println("down");
 			int d = 0;
-			for(Circle tempC: circles){
-				objectC(d).moveDown(30);
+			for(Shape move: circles) {
+				objectShape(d).moveDown(30);
 				d++;
 			}
 			break;
 		}
 	}
 
-	public Circle objectC(int num) {
-		Circle a = circles.get(num);
+	public Shape objectShape(int num) {
+		Shape a = circles.get(num);
 		return a;
 	}
 
 	public Point randomNum() {
-		Random rand = new Random();
+		Random rand1 = new Random();
 		Random rand2 = new Random();
-		int r = rand.nextInt(1000);
+		int r1 = rand1.nextInt(1000);
 		int r2 = rand2.nextInt(1000);
-		Point p = new Point(r,r2);
+		Point p = new Point(r1, r2);
 		return p;
 	}
-
 
 	@Override
 	public void keyReleased(KeyEvent e) {

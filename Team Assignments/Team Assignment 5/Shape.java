@@ -1,21 +1,20 @@
-/*import java.awt.Graphics;
+import java.awt.Graphics;
 import java.awt.Rectangle;
 
 public abstract class Shape {
 
-  private Point topLeft = new Point(0,0);
-  private int size;
+  Point topLeft = new Point(0,0);
+  int size;
 
   public Shape(Point shapeTopLeft, int shapeSize){
-    topLeft = new Point(shapeTopLeft());
+    topLeft = shapeTopLeft;
     size = shapeSize;
   }
 
-  public abstract void Draw(Graphics g);
+  public abstract void draw(Graphics g);
 
   public Point getTopLeft() {
-    Point temp = new Point(topLeft());
-    return temp;
+    return topLeft;
   }
 
   public int getSize() {
