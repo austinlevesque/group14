@@ -9,7 +9,7 @@
  */
 public class Game{
 	
-	int score;
+	static int score;
 	
 	/**
 	 * Runs the game until the game is over or the user quits.
@@ -30,7 +30,7 @@ public class Game{
 		System.out.println("Game Over.");
     }
     
-    public int gameScore(Grid gameGrid){
+    public static int gameScore(Grid gameGrid){
     	if (gameGrid.checkFood() == false){
     		setScore(getScore()+1);
     	}
@@ -38,11 +38,11 @@ public class Game{
   	}
     
     //getters+setters
-    public int getScore(){
+    public static int getScore(){
   	  return score;
   	}
 
-  	public void setScore(int scoreToSet){
+  	public static void setScore(int scoreToSet){
   	  score = scoreToSet;
   	}
 }
