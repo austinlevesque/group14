@@ -147,6 +147,7 @@ public class DrawingApp extends JFrame implements KeyListener {
             public void run() {
 				DrawingApp faceWindow = new DrawingApp();
 				faceWindow.setVisible(true);
+		   		faceWindow.getContentPane().setBackground(new java.awt.Color(250, 50, 50));
 			}
 		});
     }
