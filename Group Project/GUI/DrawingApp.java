@@ -18,12 +18,12 @@ import java.util.Random;
  *
  */
 public class DrawingApp extends JFrame implements KeyListener {
-	public static final int WINDOW_WIDTH = 827;
-	public static final int WINDOW_HEIGHT = 819;
+	public static final int WINDOW_WIDTH = 827; //technically 780 + 8 + 8 (from left and right window borders) + 30 from the top left corner of square and + 1 from spawn
+	public static final int WINDOW_HEIGHT = 819; //780 + 30 + 8 (from borders.) + 1 from spawn
+	//to clarify, (788,780) is the bottom right most square of the grid
 	public static final int DEFAULT_CIRCLE_SIZE = 100;
 
 	//private ArrayList<Shape> circles = new ArrayList<Shape>();
-	int score = 0;
 	Point p1 = new Point(8,30);
 	Point p2 = new Point(98,120);
 	Snake aSnake = new Snake(p1, 15);
@@ -70,10 +70,13 @@ public class DrawingApp extends JFrame implements KeyListener {
 	 * be re-drawn.
 	 */
     public void timerAction() {
+    	System.out.println(aSnake.getLoc(aSnake.getTopLeft()));
+    	aSnake.updateTail(aSnake.getTopLeft());
 		aSnake.moveDir(30);
 		if((aSnake.getTopLeft().getXCoord() == aFood.getTopLeft().getXCoord()) && (aSnake.getTopLeft().getYCoord() == aFood.getTopLeft().getYCoord())) {
-			score++;
-			System.out.println("Score: " + score);
+			aSnake.score++;
+			aFood = new Food(aFood.newLoc(),15);
+			System.out.println("Score: " + aSnake.score);
 		}
 		repaint();
     }
@@ -135,6 +138,7 @@ public class DrawingApp extends JFrame implements KeyListener {
 		}
 	}
 	
+	/*
 	public Point randomNum() {
 		Random rand1 = new Random();
 		Random rand2 = new Random();
@@ -143,6 +147,7 @@ public class DrawingApp extends JFrame implements KeyListener {
 		Point p = new Point(r1, r2);
 		return p;
 	}
+	*/
 
 	@Override
 	public void keyReleased(KeyEvent e) {
