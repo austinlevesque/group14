@@ -38,6 +38,10 @@ public class Snake{
 		topLeft.moveRight(amount);
 	}
 	
+	public void moveDir() {
+		
+	}
+	
 	public void setSize(int size2) {
 		size = size2;
 	}
