@@ -105,20 +105,24 @@ public class DrawingApp extends JFrame implements KeyListener {
 			break;
 		 */
 		case KeyEvent.VK_LEFT:
-			System.out.println("left");
-			aSnake.moveLeft(30);
+			aSnake.direction = "left";
+			System.out.println(aSnake.direction);
+			//aSnake.moveLeft(30);
 			break;
 		case KeyEvent.VK_RIGHT:
-			System.out.println("right");
-			aSnake.moveRight(30);
+			aSnake.direction = "right";
+			System.out.println(aSnake.direction);
+			//aSnake.moveRight(30);
 			break;
 		case KeyEvent.VK_UP:
-			System.out.println("up");
-			aSnake.moveUp(30);
+			aSnake.direction = "up";
+			System.out.println(aSnake.direction);
+			//aSnake.moveUp(30);
 			break;
 		case KeyEvent.VK_DOWN:
-			System.out.println("down");
-			aSnake.moveDown(30);
+			aSnake.direction = "down";
+			System.out.println(aSnake.direction);
+			//aSnake.moveDown(30);
 			break;
 		}
 	}
