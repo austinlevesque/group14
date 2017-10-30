@@ -40,5 +40,6 @@ public class Snake{
 
 	public void draw(Graphics g){
 		g.drawRect(getTopLeft().getXCoord(), getTopLeft().getYCoord(),getSize() * 2,getSize() * 2);
+		g.fillRect(getTopLeft().getXCoord(), getTopLeft().getYCoord(),getSize() * 2,getSize() * 2);
 	}
 }
