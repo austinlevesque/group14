@@ -6,7 +6,7 @@ public class Snake{
 	Point topLeft = new Point(0,0);
 	int size;
 	String direction = "down";
-	
+
 	public Snake(Point snakeTopLeft, int snakeSize) {
 		topLeft = snakeTopLeft;
 		size = snakeSize;
@@ -21,7 +21,7 @@ public class Snake{
 	public int getSize() {
 		return size;
 	}
-	
+
 	public void moveDir(int amount) {
 		if (direction == "down"){
 			topLeft.moveDown(amount);
@@ -33,7 +33,7 @@ public class Snake{
 			topLeft.moveRight(amount);
 		}
 	}
-	
+
 	public void setSize(int size2) {
 		size = size2;
 	}
