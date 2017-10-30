@@ -26,9 +26,15 @@ public class Point {
      * @param xValue the value for the xcoordinate of this point.
      */
     public void setXCoord(int xValue) {
-    	if (xValue >= 0) {
-            xcoord = xValue;
+    	if(xValue <= 0) {
+            xcoord = 812;
     	}
+      else if(xValue >= 812) {
+        xcoord = 15;
+      }
+      else {
+        xcoord = xValue;
+      }
     }
 
     /**
@@ -36,9 +42,15 @@ public class Point {
      * @param yValue the value for the ycoordinate of this point.
      */
     public void setYCoord(int yValue) {
-    	if (yValue >= 0) {
-            ycoord = yValue;
+    	if (yValue <= 0) {
+            ycoord = 804;
     	}
+      else if(yValue >= 804) {
+        ycoord = 15;
+      }
+      else {
+        ycoord = yValue;
+      }
     }
 
     /**
@@ -73,39 +85,5 @@ public class Point {
      */
     public void moveLeft(int amount) {
         setXCoord(xcoord - amount);
-    }
-
-    /**
-     * Computes and returns the euclidean distance between this point and the point provided
-     * as an argument.
-     * @param other the other end point to compute the distance to.
-     * @return the euclidean distance between this point and the one provided as an argument.
-     */
-    public double distance(Point other) {
-        int xdiff = xcoord - other.xcoord;
-        int ydiff = ycoord - other.ycoord;
-        int xsquare = xdiff * xdiff;
-        int ysquare = ydiff * ydiff;
-        double distance = Math.sqrt(xsquare + ysquare);
-        return distance;
-    }
-
-    /**
-     * Checks if this point and the one provided as an argument represent
-     * the same coordinate (ie have the same x- and y-coordinate).
-     * @param other the point to compare self with.
-     * @return true if the other point is the same coordinate as this point.
-     */
-    public boolean equals(Point other) {
-        return xcoord == other.xcoord && ycoord == other.ycoord;
-    }
-
-    /**
-     * Creates a string representation of this point.  The string format
-     * is (<x-coordinate>,<y-coordinate>).
-     * @return string representation of this point.
-     */
-    public String toString() {
-        return "(" + xcoord + "," + ycoord + ")";
     }
 }
