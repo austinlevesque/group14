@@ -22,7 +22,7 @@ public class DrawingApp extends JFrame implements KeyListener {
 	public static final int WINDOW_HEIGHT = 819;
 	public static final int DEFAULT_CIRCLE_SIZE = 100;
 
-	private ArrayList<Shape> circles = new ArrayList<Shape>();
+	//private ArrayList<Shape> circles = new ArrayList<Shape>();
 	Point temp1 = new Point(8,30);
 	Snake aSnake = new Snake(temp1, 15);
 
@@ -39,7 +39,7 @@ public class DrawingApp extends JFrame implements KeyListener {
 		//Circle aCircle = new Circle(temp, DEFAULT_CIRCLE_SIZE);
 		//Snake aSnake = new Snake(temp1, 15);
 		//circles.add(aCircle);
-        circles.add(aSnake);
+        //circles.add(aSnake);
 
 		// The following three windows are needed to listen to keyboard events.
 		// We need the focus in our content pane in our window to ensure we are informed of keyboard
