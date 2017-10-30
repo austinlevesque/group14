@@ -21,26 +21,6 @@ public class Snake{
 	public int getSize() {
 		return size;
 	}
-
-	public void moveDown(int amount) {
-		direction = "down";
-		topLeft.moveDown(amount);
-	}
-	
-	public void moveUp(int amount) {
-		direction = "up";
-		topLeft.moveUp(amount);
-	}
-	
-	public void moveLeft(int amount) {
-		direction = "left";
-		topLeft.moveLeft(amount);
-	}
-	
-	public void moveRight(int amount) {
-		direction = "right";
-		topLeft.moveRight(amount);
-	}
 	
 	public void moveDir(int amount) {
 		if (direction == "down"){
