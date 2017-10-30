@@ -23,8 +23,10 @@ public class DrawingApp extends JFrame implements KeyListener {
 	public static final int DEFAULT_CIRCLE_SIZE = 100;
 
 	//private ArrayList<Shape> circles = new ArrayList<Shape>();
-	Point temp1 = new Point(8,30);
-	Snake aSnake = new Snake(temp1, 15);
+	Point p1 = new Point(8,30);
+	Point p2 = new Point(98,120);
+	Snake aSnake = new Snake(p1, 15);
+	Food aFood = new Food(p2, 15);
 
     /**
      * Creates the window that users can use to draw circles.
@@ -82,6 +84,7 @@ public class DrawingApp extends JFrame implements KeyListener {
         super.paint(canvas);
 
         aSnake.draw(canvas);
+        aFood.draw(canvas);
     }
 
 	@Override
