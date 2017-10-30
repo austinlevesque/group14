@@ -44,13 +44,13 @@ public class Snake{
 	
 	public void moveDir(int amount) {
 		if (direction == "down"){
-			moveDown(amount);
+			topLeft.moveDown(amount);
 		}else if (direction == "up") {
-			moveUp(amount);
+			topLeft.moveUp(amount);
 		}else if (direction == "left"){
-			moveLeft(amount);
+			topLeft.moveLeft(amount);
 		} else {
-			moveRight(amount);
+			topLeft.moveRight(amount);
 		}
 	}
 	
