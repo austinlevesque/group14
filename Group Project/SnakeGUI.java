@@ -17,12 +17,19 @@ import java.util.Random;
  * @author Nathaly Verwaal
  *
  */
-public class DrawingApp extends JFrame implements KeyListener {
+public class SnakeGUI extends JFrame implements KeyListener {
 	public static final int WINDOW_WIDTH = 750;
 	public static final int WINDOW_HEIGHT = 750;
-	public static final int DEFAULT_SNAKE_SIZE = 10;
-	public static final int DEFAULT_FOOD_SIZE = 5;
+	public static final int DEFAULT_SHAPE_SIZE = 10;
 	String holder = "W";
+	int i = 0;
+	int s = 0;
+	Shape snakeCompare;
+	Shape foodCompare;
+	Point snakePointCompare;
+	Point foodPointCompare;
+	Shape newFoodShape;
+	Shape foodUpdate;
 
 
 	private ArrayList<Shape> snakes = new ArrayList<Shape>();
@@ -31,18 +38,24 @@ public class DrawingApp extends JFrame implements KeyListener {
     /**
      * Creates the window that users can use to draw circles.
      */
-    public DrawingApp() {
+    public SnakeGUI() {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         // put one circle in the list to get it started.
-		Point temp1 = new Point(300,300);
-		Point temp = new Point(100,100);
-		Square aSnake = new Square(temp1, DEFAULT_SNAKE_SIZE);
-		Square aFood = new Square(temp, DEFAULT_SNAKE_SIZE);
+		Point temp1 = new Point(330,330);
+		Point temp = new Point(330,330);
+		Square aSnake = new Square(temp1, DEFAULT_SHAPE_SIZE);
+		Square aFood = new Square(temp, DEFAULT_SHAPE_SIZE);
 		snakes.add(aSnake);
 		foods.add(aFood);
-
+		snakeCompare = snakes.get(0);
+		foodUpdate = foods.get(i);
+		if(i != 5){
+			foods.add(generateFood());
+			foodUpdate();
+		}
+		
 		// The following three windows are needed to listen to keyboard events.
 		// We need the focus in our content pane in our window to ensure we are informed of keyboard
 		// events.
@@ -53,7 +66,7 @@ public class DrawingApp extends JFrame implements KeyListener {
         // This creates a timer.  Whenever the timer goes off (every 200 ms)
         // we call this frame's method to repaint itself.  (Which will
         // indirectly call paint which is defined below.)
-        Timer timer = new Timer(100,
+        Timer timer = new Timer(200,
             new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     timerAction();
@@ -63,27 +76,30 @@ public class DrawingApp extends JFrame implements KeyListener {
         //timer.setInitialDelay(10000);
         timer.start();
     }
+	public void foodUpdate() {
+		foodCompare = foodUpdate;
+	}
 
 	/**
 	 * This method will move all circles in our list down and ask the frame to
 	 * be re-drawn.
 	 */
     public void timerAction() {
-		for (Shape c : snakes) {
-			if (holder.equals("W")) {
-				c.moveUp(1);
-			}
-			else if (holder.equals("A")) {
-				c.moveLeft(1);
-			}
-			else if (holder.equals("S")) {
-				c.moveDown(1);
-			}
-			else if (holder.equals("D")) {
-				c.moveRight(1);
-			}
-			repaint();
+		Shape c = snakeCompare;
+		if (holder.equals("W")) {
+				c.moveUp(15);
 		}
+		else if (holder.equals("A")) {
+				c.moveLeft(15);
+		}
+		else if (holder.equals("S")) {
+				c.moveDown(15);
+		}
+		else if (holder.equals("D")) {
+				c.moveRight(15);
+		}
+		repaint();
+		
   }
 
 	@Override
@@ -99,9 +115,9 @@ public class DrawingApp extends JFrame implements KeyListener {
         for (Shape c : snakes) {
         	c.draw(canvas);
         }
-				for (Shape f : foods) {
-					f.draw(canvas);
-				}
+				Shape f = foodCompare;
+				f.draw(canvas);
+				
     }
 
 	@Override
@@ -117,6 +133,7 @@ public class DrawingApp extends JFrame implements KeyListener {
 		switch (e.getKeyCode()) {
 		case 'W':
 			//objectShape(0).moveUp(5);
+			System.out.println("w");
 			holder = "W";
 			break;
 		case 'A':
@@ -172,6 +189,29 @@ public class DrawingApp extends JFrame implements KeyListener {
 		Shape a = snakes.get(num);
 		return a;
 	}*/
+	
+	
+	public Shape generateFood(){
+	  while (checkFood() == false){
+		Random randX = new Random();
+		Random randY = new Random();
+		Point newFoodLocation = new Point(randX.nextInt(), randY.nextInt());
+		newFoodShape = new Square(newFoodLocation, DEFAULT_SHAPE_SIZE);
+	  }
+	  return newFoodShape;
+	}
+
+	public boolean checkFood(){
+		snakePointCompare = snakeCompare.getTopLeft();
+		foodPointCompare = foodCompare.getTopLeft();
+		boolean flag = true;
+		if (snakePointCompare.getYCoord() == foodPointCompare.getYCoord() && snakePointCompare.getXCoord() == foodPointCompare.getXCoord()){
+			flag = false;
+			System.out.println("same place");
+			return flag;
+		}
+		return flag;
+	}
 
 
 	@Override
@@ -184,10 +224,10 @@ public class DrawingApp extends JFrame implements KeyListener {
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-				DrawingApp faceWindow = new DrawingApp();
+				SnakeGUI faceWindow = new SnakeGUI();
 				faceWindow.setVisible(true);
 				faceWindow.setResizable(false);
-				faceWindow.getContentPane().setBackground(new java.awt.Color(205, 155, 155));
+				//faceWindow.getContentPane().setBackground(new java.awt.Color(205, 155, 155));
 				faceWindow.setTitle("Snake");
 			}
 		});
