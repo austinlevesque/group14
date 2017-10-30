@@ -24,9 +24,11 @@ public class DrawingApp extends JFrame implements KeyListener {
 
 	//private ArrayList<Shape> circles = new ArrayList<Shape>();
 	int score = 0;
-	Snake aSnake = new Snake(randomPoint(), 15);
-	Food aFood = new Food(randomPoint(), 15);
-
+	Point p1 = new Point(8,30);
+	Point p2 = new Point(98,120);
+	Snake aSnake = new Snake(p1, 15);
+	Food aFood = new Food(p2, 15);
+	
     /**
      * Creates the window that users can use to draw circles.
      */
@@ -71,10 +73,8 @@ public class DrawingApp extends JFrame implements KeyListener {
 		aSnake.moveDir(30);
 		Point foodCompare = aFood.getTopLeft();
 		Point snakeCompare = aSnake.getTopLeft();
-		int xDifference = foodCompare.getXCoord() - snakeCompare.getXCoord();
-		int yDifference = foodCompare.getYCoord() - snakeCompare.getYCoord();
-		if(xDifference < -5 || xDifference > 5 && yDifference < -5 || yDifference > 5) {
-			aFood = new Food(randomPoint(),15);
+		if(foodCompare.getXCoord() == snakeCompare.getXCoord() && foodCompare.getYCoord() == snakeCompare.getYCoord()) {
+			aFood = new Food(newFoodPoint(),15);
 			score++;
 			System.out.println("Score: " + score);
 		}
@@ -138,13 +138,27 @@ public class DrawingApp extends JFrame implements KeyListener {
 		}
 	}
 	
-	public Point randomPoint() {
+	public int randomNum() {
+		Point snakeCompare = aSnake.getTopLeft();
 		Random rand1 = new Random();
 		Random rand2 = new Random();
 		int r1 = rand1.nextInt(829);
 		int r2 = rand2.nextInt(819);
 		Point p = new Point(r1, r2);
-		return p;
+		return r1;
+	}
+	
+	public Point newFoodPoint() {
+		Point snakeCompare = aSnake.getTopLeft();
+		int xCheck = randomNum();
+		int yCheck = randomNum();
+		int roundX = (xCheck - snakeCompare.getXCoord()) % 30;
+		int roundY = (yCheck - snakeCompare.getYCoord()) % 30;
+		while(roundX != 0 && roundY != 0){
+			randomNum();
+		}
+		Point p = new Point(xCheck, yCheck);
+		return p;	
 	}
 
 	@Override
