@@ -27,10 +27,10 @@ public class Point {
      */
     public void setXCoord(int xValue) {
     	if(xValue <= 0) {
-            xcoord = 812;
+            xcoord = 788;
     	}
       else if(xValue >= 812) {
-        xcoord = 15;
+        xcoord = 8;
       }
       else {
         xcoord = xValue;
@@ -43,10 +43,10 @@ public class Point {
      */
     public void setYCoord(int yValue) {
     	if (yValue <= 0) {
-            ycoord = 804;
+            ycoord = 780;
     	}
       else if(yValue >= 804) {
-        ycoord = 15;
+        ycoord = 30;
       }
       else {
         ycoord = yValue;
