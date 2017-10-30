@@ -21,6 +21,7 @@ public class DrawingApp extends JFrame implements KeyListener {
 	public static final int WINDOW_WIDTH = 827;
 	public static final int WINDOW_HEIGHT = 819;
 	public static final int DEFAULT_CIRCLE_SIZE = 100;
+	boolean flag = false;
 
 	//private ArrayList<Shape> circles = new ArrayList<Shape>();
 	int score = 0;
@@ -74,6 +75,7 @@ public class DrawingApp extends JFrame implements KeyListener {
 		Point foodCompare = aFood.getTopLeft();
 		Point snakeCompare = aSnake.getTopLeft();
 		if(foodCompare.getXCoord() == snakeCompare.getXCoord() && foodCompare.getYCoord() == snakeCompare.getYCoord()) {
+			flag = true;
 			aFood = new Food(newFoodPoint(),15);
 			score++;
 			System.out.println("Score: " + score);
@@ -152,13 +154,20 @@ public class DrawingApp extends JFrame implements KeyListener {
 		Point snakeCompare = aSnake.getTopLeft();
 		int xCheck = randomNum();
 		int yCheck = randomNum();
-		int roundX = (xCheck - snakeCompare.getXCoord()) % 30;
-		int roundY = (yCheck - snakeCompare.getYCoord()) % 30;
-		while(roundX != 0 && roundY != 0){
-			randomNum();
-		}
+		int roundX = xCheck - snakeCompare.getXCoord();
+		int roundY = yCheck - snakeCompare.getYCoord();
+ 		while (true) {
+			xCheck = randomNum();
+			yCheck = randomNum();
+			roundX = xCheck - snakeCompare.getXCoord();
+			roundY = yCheck - snakeCompare.getYCoord();
+			if (roundX == 90 ||roundX == -90 && roundY == 90 || roundY= -90) {
+				flag = false;
+			}
 		Point p = new Point(xCheck, yCheck);
-		return p;	
+		return p;
+		}
+			
 	}
 
 	@Override
