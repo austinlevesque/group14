@@ -66,8 +66,8 @@ public class DrawingApp extends JFrame implements KeyListener {
 	 * This method will move all circles in our list down and ask the frame to
 	 * be re-drawn.
 	 */
-    public void timerAction(){
-		aSnake.moveDown(30);
+    public void timerAction() {
+		aSnake.moveDir(30);
 		repaint();
     }
 
