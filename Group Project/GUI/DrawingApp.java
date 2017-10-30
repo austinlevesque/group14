@@ -23,6 +23,7 @@ public class DrawingApp extends JFrame implements KeyListener {
 	public static final int DEFAULT_CIRCLE_SIZE = 100;
 
 	//private ArrayList<Shape> circles = new ArrayList<Shape>();
+	int score = 0;
 	Point p1 = new Point(8,30);
 	Point p2 = new Point(98,120);
 	Snake aSnake = new Snake(p1, 15);
@@ -70,6 +71,10 @@ public class DrawingApp extends JFrame implements KeyListener {
 	 */
     public void timerAction() {
 		aSnake.moveDir(30);
+		if((aSnake.getTopLeft().getXCoord() == aFood.getTopLeft().getXCoord()) && (aSnake.getTopLeft().getYCoord() == aFood.getTopLeft().getYCoord())) {
+			score++;
+			System.out.println("Score: " + score);
+		}
 		repaint();
     }
 
