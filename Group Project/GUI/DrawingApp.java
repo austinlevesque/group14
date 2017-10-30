@@ -24,10 +24,8 @@ public class DrawingApp extends JFrame implements KeyListener {
 
 	//private ArrayList<Shape> circles = new ArrayList<Shape>();
 	int score = 0;
-	Point p1 = new Point(8,30);
-	Point p2 = new Point(98,120);
-	Snake aSnake = new Snake(p1, 15);
-	Food aFood = new Food(random, 15);
+	Snake aSnake = new Snake(randomNum(), 15);
+	Food aFood = new Food(randomNum(), 15);
 
     /**
      * Creates the window that users can use to draw circles.
@@ -138,8 +136,8 @@ public class DrawingApp extends JFrame implements KeyListener {
 	public Point randomNum() {
 		Random rand1 = new Random();
 		Random rand2 = new Random();
-		int r1 = rand1.nextInt(1000);
-		int r2 = rand2.nextInt(1000);
+		int r1 = rand1.nextInt(829);
+		int r2 = rand2.nextInt(819);
 		Point p = new Point(r1, r2);
 		return p;
 	}
