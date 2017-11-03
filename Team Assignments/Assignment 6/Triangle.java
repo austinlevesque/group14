@@ -22,7 +22,8 @@ public class Triangle {
 	}
 
 	public double getCircumference() {
-		return 0.0;
+		double temp = line1.length() + line2.length() + line3.length();
+		return temp;
 	}
 
 	public double getArea(){
