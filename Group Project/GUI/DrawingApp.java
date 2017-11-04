@@ -47,7 +47,6 @@ public class DrawingApp extends JFrame implements KeyListener {
 		// The following three windows are needed to listen to keyboard events.
 		// We need the focus in our content pane in our window to ensure we are informed of keyboard
 		// events.
-				//getContentPane().setLayout(new GridLayout());
         getContentPane().addKeyListener(this);
         getContentPane().setFocusable(true);
         requestFocusInWindow();
@@ -64,8 +63,6 @@ public class DrawingApp extends JFrame implements KeyListener {
         		timerAction();
     		}
         });
-        // The timer will go off for the first time 1000ms after the timer is started.
-        timer.setInitialDelay(1000);
         timer.start();
     }
 
@@ -80,7 +77,6 @@ public class DrawingApp extends JFrame implements KeyListener {
 			aSnake.score++;
 			aFood = new Food(aFood.newLoc(),15);
 			//aTail = new Snake(aSnake.tail.get((aSnake.score)-1),15);
-			System.out.println("Score: " + aSnake.score);
 			scoreLabel.setText("Score: " + aSnake.score);
 		}
 		repaint();
@@ -92,10 +88,10 @@ public class DrawingApp extends JFrame implements KeyListener {
 
         // Wipes the window clean
         super.paint(canvas);
-				//canvas.fillRect(C)
 
 				canvas.setColor(Color.BLACK);
 				canvas.fillRect(8,30,810,810);
+
         //Draws the snake and food
         aSnake.draw(canvas);
         aFood.draw(canvas);
@@ -162,7 +158,7 @@ public class DrawingApp extends JFrame implements KeyListener {
 			                color3 = rand.nextInt(255)+1;
 							DrawingApp faceWindow = new DrawingApp();
 							faceWindow.setVisible(true);
-					   		faceWindow.getContentPane().setBackground(new Color(color1, color2, color3));
+					   	faceWindow.getContentPane().setBackground(new Color(color1, color2, color3));
 
 			}
 		});
