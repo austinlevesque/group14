@@ -1,13 +1,8 @@
-import java.awt.Graphics;
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
-import javax.swing.Timer;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 import java.util.Random;
 
@@ -29,6 +24,9 @@ public class DrawingApp extends JFrame implements KeyListener {
 	public static final int WINDOW_HEIGHT = 819; //780 + 30 + 8 (from borders.) + 1 from spawn
 	//to clarify, (788,780) is the bottom right most square of the grid
 
+	Font f = new Font("Comic Sans", Font.BOLD, 50);
+	JLabel scoreLabel = new JLabel("Score: 0");
+
 	Point p1 = new Point(8,30);
 	Point p2 = new Point(98,120);
 	//Point p3 = new Point(1000,1000); //purposely out of bounds
@@ -44,13 +42,18 @@ public class DrawingApp extends JFrame implements KeyListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 				setResizable(false);
 				setLocationRelativeTo(null);
+				setLayout(null);
 
 		// The following three windows are needed to listen to keyboard events.
 		// We need the focus in our content pane in our window to ensure we are informed of keyboard
 		// events.
+				//getContentPane().setLayout(new GridLayout());
         getContentPane().addKeyListener(this);
         getContentPane().setFocusable(true);
         requestFocusInWindow();
+				scoreLabel.setFont(f);
+				scoreLabel.setBounds(900, 10, 900, 100);
+				add(scoreLabel);
 
         /**
          * Timer that goes off every 400ms
@@ -78,6 +81,7 @@ public class DrawingApp extends JFrame implements KeyListener {
 			aFood = new Food(aFood.newLoc(),15);
 			//aTail = new Snake(aSnake.tail.get((aSnake.score)-1),15);
 			System.out.println("Score: " + aSnake.score);
+			scoreLabel.setText("Score: " + aSnake.score);
 		}
 		repaint();
     }
@@ -151,9 +155,14 @@ public class DrawingApp extends JFrame implements KeyListener {
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-				DrawingApp faceWindow = new DrawingApp();
-				faceWindow.setVisible(true);
-		   		faceWindow.getContentPane().setBackground(Color.YELLOW);
+							int color1, color2, color3;
+			                Random rand = new Random();
+			                color1 = rand.nextInt(255)+1;
+			                color2 = rand.nextInt(255)+1;
+			                color3 = rand.nextInt(255)+1;
+							DrawingApp faceWindow = new DrawingApp();
+							faceWindow.setVisible(true);
+					   		faceWindow.getContentPane().setBackground(new Color(color1, color2, color3));
 
 			}
 		});
