@@ -1,4 +1,5 @@
 import java.awt.Graphics;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -10,39 +11,39 @@ import javax.swing.Timer;
 
 import java.util.Random;
 
+
 /**
- * Application for drawing circles on the screen.  When the user click, a circle
- * will be created on the spot of default size.  When dragging the mouse, the circle
- * will have the size indicated by the drag area.
- * @author Nathaly Verwaal
+ * Application for drawing the snake gui in a window.
+ * Based off of the DrawingApp.java used in Assignment 5, written by Nathaly Verwaal.
+ * Currently references a tail in the code but doesn't actually draw it yet
  *
+ * @verison 1.0
+ * @author Austin Levesque
+ * @author Chris O'Reilly
+ * @author Steven Canon-Almagro
+ * @author Victor Chu
+ * @author Navjot Saran
  */
 public class DrawingApp extends JFrame implements KeyListener {
-	public static final int WINDOW_WIDTH = 827;
-	public static final int WINDOW_HEIGHT = 819;
-	public static final int DEFAULT_CIRCLE_SIZE = 100;
+	public static final int WINDOW_WIDTH = 1250; //technically 780 + 8 + 8 (from left and right window borders) + 30 from the top left corner of square and + 1 from spawn
+	public static final int WINDOW_HEIGHT = 819; //780 + 30 + 8 (from borders.) + 1 from spawn
+	//to clarify, (788,780) is the bottom right most square of the grid
 
-	//private ArrayList<Shape> circles = new ArrayList<Shape>();
-	int score = 0;
 	Point p1 = new Point(8,30);
 	Point p2 = new Point(98,120);
+	//Point p3 = new Point(1000,1000); //purposely out of bounds
 	Snake aSnake = new Snake(p1, 15);
 	Food aFood = new Food(p2, 15);
+	//Snake aTail = new Snake(p3, 15);
 
     /**
-     * Creates the window that users can use to draw circles.
+     * Creates a window that the game will be played in
      */
     public DrawingApp() {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-        // put one circle in the list to get it started.
-		//Point temp = new Point(0,0);
-		//Point temp1 = new Point(8,30);
-		//Circle aCircle = new Circle(temp, DEFAULT_CIRCLE_SIZE);
-		//Snake aSnake = new Snake(temp1, 15);
-		//circles.add(aCircle);
-        //circles.add(aSnake);
+				setResizable(false);
+				setLocationRelativeTo(null);
 
 		// The following three windows are needed to listen to keyboard events.
 		// We need the focus in our content pane in our window to ensure we are informed of keyboard
@@ -51,112 +52,109 @@ public class DrawingApp extends JFrame implements KeyListener {
         getContentPane().setFocusable(true);
         requestFocusInWindow();
 
-        // This creates a timer.  Whenever the timer goes off (every 200 ms)
-        // we call this frame's method to repaint itself.  (Which will
-        // indirectly call paint which is defined below.)
-        Timer timer = new Timer(400,
-            new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    timerAction();
-                }
-            });
+        /**
+         * Timer that goes off every 400ms
+         * Calls frame method to repaint itself which indirectly calls paint()
+         */
+        Timer timer = new Timer(400, new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		timerAction();
+    		}
+        });
         // The timer will go off for the first time 1000ms after the timer is started.
         timer.setInitialDelay(1000);
         timer.start();
     }
 
 	/**
-	 * This method will move all circles in our list down and ask the frame to
-	 * be re-drawn.
+	 * Moves the snake in it's current direction and checks if it has collided with the food and then calls the objects to be repainted
 	 */
     public void timerAction() {
+    	//System.out.println(aSnake.getLoc(aSnake.getTopLeft()));
+    	//aSnake.updateTail(aSnake.getTopLeft());
 		aSnake.moveDir(30);
 		if((aSnake.getTopLeft().getXCoord() == aFood.getTopLeft().getXCoord()) && (aSnake.getTopLeft().getYCoord() == aFood.getTopLeft().getYCoord())) {
-			score++;
-			System.out.println("Score: " + score);
-			aFood.setTopLeft(randomNum());
+			aSnake.score++;
+			aFood = new Food(aFood.newLoc(),15);
+			//aTail = new Snake(aSnake.tail.get((aSnake.score)-1),15);
+			System.out.println("Score: " + aSnake.score);
 		}
 		repaint();
     }
 
 	@Override
     public void paint(Graphics canvas) {
-		// Draws what should be displayed in this window.  this will be called each
-		// time the window needs to be refreshed.  This includes when the window
-		// is displayed, maximized, moved, etc.)
+		// Draws the gui. Called in timerAction() every 400ms
 
-        // We need to do this call to make sure the window is wiped clean before we
-        // start drawing.
+        // Wipes the window clean
         super.paint(canvas);
+				//canvas.fillRect(C)
 
+				canvas.setColor(Color.BLACK);
+				canvas.fillRect(8,30,810,810);
+        //Draws the snake and food
         aSnake.draw(canvas);
         aFood.draw(canvas);
+
+        //aTail.draw(canvas);
+        /*
+        if (aSnake.tail.size() > 0){
+    		//System.out.println(aSnake.tail.get(0));
+        	//aTail = aSnake.tail.get(0);
+        	p3 = aSnake.tail.get(0);
+        	Snake aTail = new Snake(p3, 15);
+        	aTail.draw(canvas);
+    	}
+    	*/
     }
 
-	@Override
-	public void keyTyped(KeyEvent event) {
-		// Required for KeyListener, but we are not interested in this event so we'll
-		// do nothing.
-	}
-
+	/**
+	 * Checks for key-presses and changes the instance variable direction for the aSnake object, which changes the direction it's traveling
+	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int size = 50;
 		switch (e.getKeyCode()) {
-		/*
-		case 'C':
-			System.out.println("C");
-			circles.add(new Circle(randomNum(), DEFAULT_CIRCLE_SIZE));
-			break;
-		case 'S':
-			System.out.println("S");
-			circles.add(new Snake(randomNum(), DEFAULT_CIRCLE_SIZE));
-			break;
-		 */
 		case KeyEvent.VK_LEFT:
 			aSnake.direction = "left";
 			System.out.println(aSnake.direction);
-			//aSnake.moveLeft(30);
 			break;
 		case KeyEvent.VK_RIGHT:
 			aSnake.direction = "right";
 			System.out.println(aSnake.direction);
-			//aSnake.moveRight(30);
 			break;
 		case KeyEvent.VK_UP:
 			aSnake.direction = "up";
 			System.out.println(aSnake.direction);
-			//aSnake.moveUp(30);
 			break;
 		case KeyEvent.VK_DOWN:
 			aSnake.direction = "down";
 			System.out.println(aSnake.direction);
-			//aSnake.moveDown(30);
 			break;
 		}
 	}
 
-	public Point randomNum() {
-		Random rand1 = new Random();
-		Random rand2 = new Random();
-		int r1 = rand1.nextInt(1000);
-		int r2 = rand2.nextInt(1000);
-		Point p = new Point(r1, r2);
-		return p;
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// Required for KeyListener. Does nothing for this code
 	}
 
 	@Override
-	public void keyReleased(KeyEvent e) {
-		// Required for KeyListener, but we are not interested in this event so we'll
-		// do nothing.
+	public void keyTyped(KeyEvent event) {
+		// Required for KeyListener. Does nothing for this code
 	}
 
+	/**
+	 * Main function that initializes the game and window as well as its background color
+	 * @param args
+	 */
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
 				DrawingApp faceWindow = new DrawingApp();
 				faceWindow.setVisible(true);
-		   		faceWindow.getContentPane().setBackground(new java.awt.Color(250, 50, 50));
+		   		faceWindow.getContentPane().setBackground(Color.YELLOW);
+
 			}
 		});
     }

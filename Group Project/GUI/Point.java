@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 /**
+ * Most of this code is used from the code provided in the original Point.java for assingment 5.
+ * Heavily edited to check boundary locations and keep the snake perfectly alligned with the grid
  * Class representing a point on the screen.  The top left point on the screen
  * is considered (0,0).  Moving to the right increases the x-coordinate,
  * moving down, increases the y-coordinate.
@@ -27,10 +29,10 @@ public class Point {
      */
     public void setXCoord(int xValue) {
     	if(xValue <= 0) {
-            xcoord = 812;
+            xcoord = 788;
     	}
       else if(xValue >= 812) {
-        xcoord = 15;
+        xcoord = 8;
       }
       else {
         xcoord = xValue;
@@ -43,10 +45,10 @@ public class Point {
      */
     public void setYCoord(int yValue) {
     	if (yValue <= 0) {
-            ycoord = 804;
+            ycoord = 780;
     	}
       else if(yValue >= 804) {
-        ycoord = 15;
+        ycoord = 30;
       }
       else {
         ycoord = yValue;
