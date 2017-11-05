@@ -40,13 +40,13 @@ public class DrawingApp extends JFrame implements KeyListener {
     public DrawingApp() {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-				setResizable(false);
-				setLocationRelativeTo(null);
-				setLayout(null);
+			  setResizable(false);
+			  setLocationRelativeTo(null);
+		    setLayout(null);
 
-		// The following three windows are needed to listen to keyboard events.
-		// We need the focus in our content pane in our window to ensure we are informed of keyboard
-		// events.
+				// The following three windows are needed to listen to keyboard events.
+				// We need the focus in our content pane in our window to ensure we are informed of keyboard
+				// events.
         getContentPane().addKeyListener(this);
         getContentPane().setFocusable(true);
         requestFocusInWindow();
@@ -75,7 +75,7 @@ public class DrawingApp extends JFrame implements KeyListener {
 		aSnake.moveDir(30);
 		if((aSnake.getTopLeft().getXCoord() == aFood.getTopLeft().getXCoord()) && (aSnake.getTopLeft().getYCoord() == aFood.getTopLeft().getYCoord())) {
 			aSnake.score++;
-			aFood = new Food(aFood.newLoc(),15);
+			aFood = new Food(aFood.newLoc(26),15);
 			//aTail = new Snake(aSnake.tail.get((aSnake.score)-1),15);
 			scoreLabel.setText("Score: " + aSnake.score);
 		}
@@ -115,19 +115,19 @@ public class DrawingApp extends JFrame implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		int size = 50;
 		switch (e.getKeyCode()) {
-		case KeyEvent.VK_LEFT:
+		case KeyEvent.VK_A:
 			aSnake.direction = "left";
 			System.out.println(aSnake.direction);
 			break;
-		case KeyEvent.VK_RIGHT:
+		case KeyEvent.VK_D:
 			aSnake.direction = "right";
 			System.out.println(aSnake.direction);
 			break;
-		case KeyEvent.VK_UP:
+		case KeyEvent.VK_W:
 			aSnake.direction = "up";
 			System.out.println(aSnake.direction);
 			break;
-		case KeyEvent.VK_DOWN:
+		case KeyEvent.VK_S:
 			aSnake.direction = "down";
 			System.out.println(aSnake.direction);
 			break;

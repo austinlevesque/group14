@@ -11,8 +11,8 @@ public class Point {
     private int ycoord = 0;
 
     public Point(int x, int y){
-    	setXCoord(x);
-    	setYCoord(y);
+      xcoord = x;
+      ycoord = y;
     }
 
     public int getXCoord() {
@@ -28,9 +28,9 @@ public class Point {
      * @param xValue the value for the xcoordinate of this point.
      */
     public void setXCoord(int xValue) {
-    	if(xValue <= 0) {
-            xcoord = 788;
-    	}
+      if(xValue <= 0) {
+        xcoord = 788;
+      }
       else if(xValue >= 812) {
         xcoord = 8;
       }
@@ -39,20 +39,30 @@ public class Point {
       }
     }
 
+    //specifically for text based.
+    public void setXCoord1(int xValue) {
+        xcoord = xValue;
+    }
+
     /**
      * To ensure the point falls on the screen, the y-coordinate must be non-negative.
      * @param yValue the value for the ycoordinate of this point.
      */
     public void setYCoord(int yValue) {
-    	if (yValue <= 0) {
-            ycoord = 780;
-    	}
+      if (yValue <= 0) {
+        ycoord = 780;
+      }
       else if(yValue >= 804) {
         ycoord = 30;
       }
       else {
         ycoord = yValue;
       }
+    }
+
+    //specifically for text based.
+    public void setYCoord1(int yValue) {
+        ycoord = yValue;
     }
 
     /**

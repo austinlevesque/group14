@@ -10,6 +10,8 @@ public abstract class GameObject {
   int size;
   int score = 0;
   String direction = "down";
+  int r1;
+  int r2;
 
   public GameObject(Point snakeTopLeft, int snakeSize) {
 		topLeft = snakeTopLeft;
@@ -36,12 +38,20 @@ public abstract class GameObject {
     }
   }
 
-  public Point newLoc() {
+  public Point newLoc(int range) {
     Random rand1 = new Random();
-    int r1 = rand1.nextInt(26) * 30 + 8;
-    int r2 = rand1.nextInt(26) * 30;
-    Point newPoint = new Point(r1,r2);
+    Point newPoint = new Point(0,0);
+    if(range == 26) {
+      r1 = rand1.nextInt(26) * 30 + 8;
+      r2 = rand1.nextInt(26) * 30;
+    }
+    else if (range == 10) {
+      r1 = rand1.nextInt(11);
+      r2 = rand1.nextInt(11);
+    }
     System.out.println(getLoc(newPoint));
+    newPoint.setXCoord(r1);
+    newPoint.setYCoord(r2);
     return newPoint;
   }
 
