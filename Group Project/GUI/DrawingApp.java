@@ -94,7 +94,24 @@ public class DrawingApp extends JFrame implements KeyListener {
 		//System.out.println("Snake Tail Location: ("+ aTail.getTopLeft().getXCoord()+","+aTail.getTopLeft().getYCoord()+")");
 		//System.out.println("Snake New Location: "+ aSnake.getLoc(aSnake.getTopLeft()));
 		aSnake.moveDir(30);
-		if((aSnake.getTopLeft().getXCoord() == aFood.getTopLeft().getXCoord()) && (aSnake.getTopLeft().getYCoord() == aFood.getTopLeft().getYCoord())) {
+		//ArrayList<Point> testList = new ArrayList<Point>();
+		//testList.add(p1);
+		System.out.println(p1);
+		/*
+		if (((aSnake.tail.size())) > 0){
+			System.out.println(aSnake.tailStrings.get(0));
+		}
+		*/
+		if(aSnake.tailStrings.contains(aSnake.getLoc(p1))){
+            System.out.println("Game over");
+            System.exit(0);
+        }
+		/*
+		if(aSnake.getLoc(aSnake.getTopLeft()).equals(aFood.getLoc(aFood.getTopLeft()))) {
+			
+		}
+		*/
+		if(aSnake.getLoc(aSnake.getTopLeft()).equals(aFood.getLoc(aFood.getTopLeft()))) {
 			aSnake.score++;
 			aFood = new Food(aFood.newLoc(26),15);
 			//aTail = new Snake(aSnake.tail.get((aSnake.score)-1),15);
