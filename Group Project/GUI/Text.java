@@ -8,12 +8,13 @@ public class Text {
   Snake snake = new Snake(new Point (1,1), 0);
   Food food = new Food(new Point(0,0), 0);
   String input;
+  boolean runningGame = true;
 
 
   List<Integer> tailX = new ArrayList<Integer>();
   List<Integer> tailY = new ArrayList<Integer>();
 
-  public void grid() {
+  public boolean grid() {
     System.out.println("Game Score: " + snake.score);
     String[][] arrayGrid = new String[ARRAY_X][ARRAY_Y];
     for(int row = 0; row < ARRAY_X; row++) {
@@ -22,27 +23,19 @@ public class Text {
           arrayGrid[food.getTopLeft().getYCoord()][food.getTopLeft().getXCoord()] = "* ";
           arrayGrid[snake.getTopLeft().getYCoord()][snake.getTopLeft().getXCoord()] = "S ";
           for(int j = snake.tail.size(); j>0; j--){
+            if(arrayGrid[snake.tail.get(j-1).getYCoord()][snake.tail.get(j-1).getXCoord()] == "S "){
+            //if the head has collided with the tail
+              runningGame = false;
+            }
+            else {
               arrayGrid[snake.tail.get(j-1).getYCoord()][snake.tail.get(j-1).getXCoord()] = "s ";
+            }
           }
           System.out.print(arrayGrid[row][column]);
-  /*
-          if (snake.tail.size() > 0){
-          arrayGrid[snake.tail.get(0).getYCoord()][snake.tail.get(0).getXCoord()] = "s ";
-          }
-          */
-//          for(int j = tailX.size(); j>0; j--){
-          //draws the tail and detects if the head has collided with the tail
-          /*
-            if(arrayGrid[(mainSnake.tailY.get(j-1))][mainSnake.tailX.get(j-1)] == "S "){
-            //if the head has collided with the tail
-              mainSnake.gameover = true;
-            }else{*/
-//              arrayGrid[tailY.get(j-1)][tailX.get(j-1)] = "s ";
-              //arrayGrid[snake.tail.get(j-1).getYCoord()][snake.tail.get(j-1).getXCoord()] = "s ";
-//          }
         }
         System.out.println();
     }
+    return runningGame;
   }
 
   /*
@@ -69,6 +62,10 @@ public class Text {
 	  }
 	}
    */
+
+   public boolean getRunningGame() {
+     return runningGame;
+   }
 
 
   public boolean eat(){
@@ -98,7 +95,7 @@ public class Text {
 
 		int moveX = snake.getTopLeft().getXCoord();
     int moveY = snake.getTopLeft().getYCoord();
-		snake.updateTail(snake.getTopLeft().getXCoord(), snake.getTopLeft().getYCoord());
+		snake.updateTail(moveX, moveY);
 		//stores previous location data for the tail
 		if (input.equals("w")){
       moveY--;
@@ -142,10 +139,10 @@ public class Text {
 	}
 
     public static void main(String[] args) {
-      boolean running = true;
       Text run = new Text();
+      boolean running = true;
       while(running){
-        run.grid();
+        running = run.grid();
         run.userInput();
         run.moveSnake();
         if(run.eat()) {
@@ -153,5 +150,6 @@ public class Text {
           run.snake.score++;
         }
       }
+      System.out.println("Game Over.");
     }
 }
