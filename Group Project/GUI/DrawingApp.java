@@ -40,7 +40,7 @@ public class DrawingApp extends JFrame implements KeyListener {
     /**
      * Creates a window that the game will be played in
      */
-    public DrawingApp() {
+    public DrawingApp(int color1, int color2, int color3) {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 			  setResizable(false);
@@ -53,6 +53,9 @@ public class DrawingApp extends JFrame implements KeyListener {
         getContentPane().addKeyListener(this);
         getContentPane().setFocusable(true);
         requestFocusInWindow();
+	    			if (color1 <= 100 || color2 <= 100 || color3 <= 1 ){
+					scoreLabel.setForeground(Color.WHITE);
+				}
 				scoreLabel.setFont(f);
 				scoreLabel.setBounds(900, 10, 900, 100);
 				add(scoreLabel);
@@ -212,7 +215,7 @@ public class DrawingApp extends JFrame implements KeyListener {
 			                color1 = rand.nextInt(255)+1;
 			                color2 = rand.nextInt(255)+1;
 			                color3 = rand.nextInt(255)+1;
-							DrawingApp faceWindow = new DrawingApp();
+							DrawingApp faceWindow = new DrawingApp(color1, color2, color3);
 							faceWindow.setVisible(true);
 					   	faceWindow.getContentPane().setBackground(new Color(color1, color2, color3));
 
