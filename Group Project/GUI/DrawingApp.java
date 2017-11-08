@@ -96,7 +96,7 @@ public class DrawingApp extends JFrame implements KeyListener {
 		aSnake.moveDir(30);
 		//ArrayList<Point> testList = new ArrayList<Point>();
 		//testList.add(p1);
-		System.out.println(p1);
+		//System.out.println(p1);
 		/*
 		if (((aSnake.tail.size())) > 0){
 			System.out.println(aSnake.tailStrings.get(0));
