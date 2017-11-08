@@ -143,12 +143,14 @@ public class Text {
       boolean running = true;
       while(running){
         running = run.grid();
+        run.grid();
         run.userInput();
         run.moveSnake();
         if(run.eat()) {
           run.food = new Food(run.food.newLoc(10), 0);
           run.snake.score++;
         }
+        running = run.grid();
       }
       System.out.println("Game Over.");
     }
