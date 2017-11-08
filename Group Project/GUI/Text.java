@@ -125,9 +125,9 @@ public class Text {
       }
       snake.getTopLeft().setXCoord1(moveX);
 		}
-    /*else{
-			this.running = false;
-		}*/
+    else {
+			runningGame = false;
+		}
 		if (snake.tail.size() > 0){
 			System.out.println("Tail Position:"+snake.tail.get(0).getXCoord()+","+snake.tail.get(0).getYCoord());
 		}
