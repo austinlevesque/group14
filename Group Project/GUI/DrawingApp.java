@@ -29,9 +29,12 @@ public class DrawingApp extends JFrame implements KeyListener {
 
 	Point p1 = new Point(8,30);
 	Point p2 = new Point(98,120);
+	//Point p3 = new Point(8,30);
 	//Point p3 = new Point(1000,1000); //purposely out of bounds
 	Snake aSnake = new Snake(p1, 15);
+	//Snake aTail = new Snake(p3, 15);
 	Food aFood = new Food(p2, 15);
+	//ArrayList<Snake> tailList = new ArrayList<Snake>();
 	//Snake aTail = new Snake(p3, 15);
 
     /**
@@ -70,10 +73,45 @@ public class DrawingApp extends JFrame implements KeyListener {
 	 * Moves the snake in it's current direction and checks if it has collided with the food and then calls the objects to be repainted
 	 */
     public void timerAction() {
-    	//System.out.println(aSnake.getLoc(aSnake.getTopLeft()));
-    	//aSnake.updateTail(aSnake.getTopLeft());
+    	//System.out.println("Snake Old Location: "+ aSnake.getLoc(aSnake.getTopLeft()));
+    	//if(aSnake.tail.size()>0) {
+    		/*for(int j = mainSnake.tailX.size(); j>0; j--){
+    			System.out.println("Snake Tail Location: "+ aSnake.tail.get(0));
+    		}*/
+    	//}
+    	aSnake.updateTail(p1.getXCoord(),p1.getYCoord());
+    	/*
+		if (aSnake.tail.size() > 0){
+			for(int j = aSnake.tail.size(); j>0; j--){
+				//arrayGrid[(mainSnake.tailY.get(j-1))][mainSnake.tailX.get(j-1)] = "s ";
+				Snake tempTail = new Snake(aSnake.tail.get(j-1), 15);
+				tailList.add(tempTail);
+			}
+			//tailList.add(new Snake(aSnake.tail.get(0), 15));
+		}
+		*/
+    	//System.out.println("Snake Tail Location: ("+ aTail.getTopLeft().getXCoord()+","+aTail.getTopLeft().getYCoord()+")");
+		//System.out.println("Snake Tail Location: ("+ aTail.getTopLeft().getXCoord()+","+aTail.getTopLeft().getYCoord()+")");
+		//System.out.println("Snake New Location: "+ aSnake.getLoc(aSnake.getTopLeft()));
 		aSnake.moveDir(30);
-		if((aSnake.getTopLeft().getXCoord() == aFood.getTopLeft().getXCoord()) && (aSnake.getTopLeft().getYCoord() == aFood.getTopLeft().getYCoord())) {
+		//ArrayList<Point> testList = new ArrayList<Point>();
+		//testList.add(p1);
+		System.out.println(p1);
+		/*
+		if (((aSnake.tail.size())) > 0){
+			System.out.println(aSnake.tailStrings.get(0));
+		}
+		*/
+		if(aSnake.tailStrings.contains(aSnake.getLoc(p1))){
+            System.out.println("Game over");
+            System.exit(0);
+        }
+		/*
+		if(aSnake.getLoc(aSnake.getTopLeft()).equals(aFood.getLoc(aFood.getTopLeft()))) {
+			
+		}
+		*/
+		if(aSnake.getLoc(aSnake.getTopLeft()).equals(aFood.getLoc(aFood.getTopLeft()))) {
 			aSnake.score++;
 			aFood = new Food(aFood.newLoc(26),15);
 			//aTail = new Snake(aSnake.tail.get((aSnake.score)-1),15);
@@ -89,13 +127,28 @@ public class DrawingApp extends JFrame implements KeyListener {
         // Wipes the window clean
         super.paint(canvas);
 
-				canvas.setColor(Color.BLACK);
-				canvas.fillRect(8,30,810,810);
+				canvas.setColor(Color.WHITE);
+				canvas.fillRect(8,30,810,780);
 
         //Draws the snake and food
-        aSnake.draw(canvas);
-        aFood.draw(canvas);
+				/*
+		if (((aSnake.tail.size())) > 0){
+			System.out.println("Tail Size: "+ aSnake.tail.size());
+			System.out.println("Tail 0 X: "+ aSnake.tail.get(0).getXCoord());
+			System.out.println("Snake Tail Location: ("+ aSnake.tail.get(0).getXCoord()+","+aSnake.tail.get(0).getYCoord()+")");
+			Point p4 = new Point (aSnake.tail.get(0).getXCoord(),aSnake.tail.get(0).getYCoord());
+			//p3 = aSnake.tail.get(0);
+			//p3 = new Point(aSnake.tail.get(1).getXCoord(),aSnake.tail.get(1).getYCoord());
+	        aTail = new Snake(p4, 15);
+		}
+		*/
+				
+		//Point p4 = p1;
+		//aTail.draw(canvas);
 
+        aSnake.draw(canvas);
+        //aTail.draw(canvas);
+        aFood.draw(canvas);
         //aTail.draw(canvas);
         /*
         if (aSnake.tail.size() > 0){
@@ -106,6 +159,9 @@ public class DrawingApp extends JFrame implements KeyListener {
         	aTail.draw(canvas);
     	}
     	*/
+        for (Snake s : aSnake.tailSnakes) {
+        	s.draw(canvas);
+        }
     }
 
 	/**

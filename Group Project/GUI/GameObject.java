@@ -44,14 +44,16 @@ public abstract class GameObject {
     if(range == 26) {
       r1 = rand1.nextInt(26) * 30 + 8;
       r2 = rand1.nextInt(26) * 30;
+      newPoint.setXCoord(r1);
+      newPoint.setYCoord(r2);
     }
     else if (range == 10) {
-      r1 = rand1.nextInt(11);
-      r2 = rand1.nextInt(11);
+      r1 = rand1.nextInt(9) + 1;
+      r2 = rand1.nextInt(9) + 1;
+      newPoint.setXCoord1(r1);
+      newPoint.setYCoord1(r2);
     }
     System.out.println(getLoc(newPoint));
-    newPoint.setXCoord(r1);
-    newPoint.setYCoord(r2);
     return newPoint;
   }
 
@@ -66,16 +68,6 @@ public abstract class GameObject {
     public String getLoc(Point pointToCheck) {
       String loc = ("("+pointToCheck.getXCoord()+","+pointToCheck.getYCoord()+")");
       return loc;
-    }
-  */
-
-  /*
-  public void updateTail(Point prevPt){
-    tail.add(prevPt);
-    if ((tail.size()-1) > score) {
-      while((tail.size()-1) > score){
-        tail.remove(0);
-      }
     }
   */
 

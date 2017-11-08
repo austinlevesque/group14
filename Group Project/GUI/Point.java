@@ -39,9 +39,13 @@ public class Point {
       }
     }
 
-    //specifically for text based.
+    //these setters are specifically for text based at the moment.
     public void setXCoord1(int xValue) {
         xcoord = xValue;
+    }
+
+    public void setYCoord1(int yValue) {
+        ycoord = yValue;
     }
 
     /**
@@ -58,11 +62,6 @@ public class Point {
       else {
         ycoord = yValue;
       }
-    }
-
-    //specifically for text based.
-    public void setYCoord1(int yValue) {
-        ycoord = yValue;
     }
 
     /**

@@ -2,7 +2,6 @@
 public class SnakeMove {
 
   Point topLeft = new Point(0,0);
-  //Point tailPoint = new Point(0,0);
   int size;
   int score = 0;
   String direction = "down";
@@ -23,5 +22,6 @@ public class SnakeMove {
       topLeft.moveRight(amount);
     }
   }
+
 
 }
