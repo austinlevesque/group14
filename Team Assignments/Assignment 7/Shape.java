@@ -28,9 +28,19 @@ public abstract class Shape {
 
   public abstract double getArea();
 
-  //not to sure how to do this method
+  /**
+    * Potential privacy leak when this method is called because it references to the
+    * where the location of the ArrayList is stored. To fix this we will need to
+    * send a copy instead.
+    *
+    * @return Line
+    */
   protected Line getLine(int i) {
-    return lineList.get(i);
+    ArrayList<Line> copy = new ArrayList<Line>();
+    for(Line l : lineList) {
+      copy.add(l);
+    }
+    return copy.get(i);
   }
 
   /**
