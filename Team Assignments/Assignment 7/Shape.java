@@ -1,9 +1,15 @@
 import java.util.ArrayList;
 
+/*
+* Parent class to Triangle.  Class adds lines to an array list and makes sure the shape made from lines is a valid shape.
+* Class also converts the array list into a string format. 
+*/
+
 public abstract class Shape {
 
   private ArrayList<Line> lineList = new ArrayList<Line>();
   private int counter;
+  private int count;
   private double totalCircum;
 
 
@@ -11,7 +17,9 @@ public abstract class Shape {
     * Potential privacy leak when this method is called because it references to the
     * where the location of the line arguement is stored. To fix this we will need to
     * send a copy instead.
-    *
+    * 
+    * Adds lines to array list. 
+    * Checks if the end of one point is the start of another in order to make a valid shape.
     * @return void
     */
   protected void addLine(Line l) {
@@ -58,18 +66,34 @@ public abstract class Shape {
     return copy;
   }
 
+  /*
+  * Calculates circumference for a given shape.
+  * @return double
+  */
   public double getCircumference() {
     for(Line l: lineList) {
       totalCircum += l.length();
     }
     return totalCircum;
   }
-
+ 
+  /*
+  * Converts array list into a string format.
+  * Adds a comma to separate between coordinate points.
+  * Checks position of coordinates to make sure a comma is not added
+  * after the last coordinate point.
+  * @return String
+  */
   public String toString(){
-    String stringHolder = "";
-    for(Line l : lineList) {
-      stringHolder += l.toString();
-    }
-    return stringHolder;
-  }
+	   String stringHolder = "";
+	   for(Line l : lineList) {
+		   if (count != lineList.size() - 1){
+				stringHolder += l.toString() + ",";
+				}
+				else{
+					stringHolder += l.toString();
+				}
+			count++;	
+      } return stringHolder;
+	}
 }
