@@ -24,7 +24,18 @@ public abstract class Shape {
     return lineList.get(0);
   }
 
+  /**
+    * Potential privacy when this method is called because it references to the
+    * current location where the ArrayList is stored. To fix this we will need to
+    * send a copy instead.
+    *
+    * @return ArrayList<Line<
+    */
   public ArrayList<Line> getShape() {
+    ArrayList<Line> copy = new ArrayList<Line>();
+    for(Line l : lineList) {
+      copy.add(l);
+    }
     return lineList;
   }
 
