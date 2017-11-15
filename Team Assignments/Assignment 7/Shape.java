@@ -7,12 +7,13 @@ public abstract class Shape {
   private double totalCircum;
   private String stringHolder = " ";
 
-  protected void addLine(Line line) {
+  protected void addLine(Line l) {
     if (lineList.size() == 0){
-      lineList.add(line);
+      lineList.add(l);
     }
-    else if(lineList.get(counter).getEnd() == line.getStart()) {
-      lineList.add(line);
+    else if(l.getStart().getXCoord() == lineList.get(counter).getEnd().getXCoord() &&
+    l.getStart().getYCoord() == lineList.get(counter).getEnd().getYCoord()) {
+      lineList.add(l);
       counter++;
     }
   }
@@ -38,11 +39,11 @@ public abstract class Shape {
   //still working on
   public String toString(){
     /*
-    for(ArrayList l : lineList){
-      stringHolder
+    for(Line l: lineList) {
+      l.toString();
     }
 		return asString + ":" + interestRate + ", " + transactionCounter;
-	}*/
-  return stringHolder;
+    */
+    return stringHolder;
   }
 }
