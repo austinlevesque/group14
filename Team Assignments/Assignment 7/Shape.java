@@ -4,6 +4,7 @@ public abstract class Shape {
 
   private ArrayList<Line> lineList = new ArrayList<Line>();
   private int counter;
+  private int count;
   private double totalCircum;
 
   protected void addLine(Line l) {
@@ -46,12 +47,16 @@ public abstract class Shape {
     return totalCircum;
   }
 
-  //still working on
   public String toString(){
-    String stringHolder = "";
-    for(Line l : lineList) {
-      stringHolder += l.toString();
-    }
-    return stringHolder;
-  }
+	   String stringHolder = "";
+	   for(Line l : lineList) {
+		   if (count != lineList.size() - 1){
+				stringHolder += l.toString() + ",";
+				}
+				else{
+					stringHolder += l.toString();
+				}
+			count++;	
+      } return stringHolder;
+	}
 }
