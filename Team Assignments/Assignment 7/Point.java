@@ -77,4 +77,8 @@ public class Point {
     }
     return flag;
   }
+
+  public String toString() {
+    return "(" + getXCoord() + "," + getYCoord() + ")";
+  }
 }

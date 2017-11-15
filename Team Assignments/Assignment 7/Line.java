@@ -32,4 +32,7 @@ public class Line {
     return temp;
   }
 
+  public String toString() {
+    return "[" + getStart().toString() + "," + getEnd().toString() + "]";
+  }
 }

@@ -5,7 +5,6 @@ public abstract class Shape {
   private ArrayList<Line> lineList = new ArrayList<Line>();
   private int counter;
   private double totalCircum;
-  private String stringHolder = " ";
 
   protected void addLine(Line l) {
     if (lineList.size() == 0){
@@ -25,7 +24,7 @@ public abstract class Shape {
     return lineList.get(0);
   }
 
-  public ArrayList getShape() {
+  public ArrayList<Line> getShape() {
     return lineList;
   }
 
@@ -38,12 +37,10 @@ public abstract class Shape {
 
   //still working on
   public String toString(){
-    /*
-    for(Line l: lineList) {
-      l.toString();
+    String stringHolder = "";
+    for(Line l : lineList) {
+      stringHolder += l.toString();
     }
-		return asString + ":" + interestRate + ", " + transactionCounter;
-    */
     return stringHolder;
   }
 }
