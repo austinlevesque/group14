@@ -68,6 +68,8 @@ public abstract class Shape {
 
   /*
   * Calculates circumference for a given shape.
+  * Uses length method in Line class and a for loop to add line
+  * lengths together to get circumference.
   * @return double
   */
   public double getCircumference() {
