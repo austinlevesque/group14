@@ -9,12 +9,20 @@ public class BankAccount {
     private int accountNumber = 1;
     private static int accountCounter;
     
+    /*
+    * Constructor for BankAccount with 0 initial balance.
+    * Increments counter when called and sets new account number.
+    */
 	public BankAccount() {
         accountCounter++;
         accountNumber = accountCounter;
 
 	}
 	
+    /*
+    * Constructor for BankAccount with an initial balance.
+    * Increments counter when called and sets a new account number.
+    */
 	public BankAccount(double startBalance) {
         accountCounter++;
 		balance = startBalance;
