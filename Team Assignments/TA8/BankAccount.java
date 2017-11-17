@@ -7,15 +7,19 @@
 public class BankAccount {
     private double balance = 0.0;
     private int accountNumber = 1;
-	private static int accountCounter = 0;
+    private static int accountCounter;
     
 	public BankAccount() {
-		accountCounter++;
+        accountCounter++;
+        accountNumber = accountCounter;
+
 	}
 	
 	public BankAccount(double startBalance) {
+        accountCounter++;
 		balance = startBalance;
-		accountCounter++;
+        accountNumber = accountCounter;
+        
 	}
     
 	public BankAccount(BankAccount accountToCopy) {
@@ -35,7 +39,7 @@ public class BankAccount {
      * @return the account number of the account.
      */
     public int getAccountNumber() {
-        return accountCounter;
+        return accountNumber;
     }
     
     /**
@@ -88,7 +92,8 @@ public class BankAccount {
      * Two BankAccounts are considered equal if they have the same account number.
      * @param other the account to check for equality with.
      */
-    public boolean equals() {
-        return getAccountNumber() == accountCounter;
+    public boolean equals(BankAccount other) {
+        return this == other;
     }
-}
+
+
