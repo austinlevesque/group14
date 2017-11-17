@@ -93,7 +93,7 @@ public class BankAccount {
      * @param other the account to check for equality with.
      */
     public boolean equals(BankAccount other) {
-        return this == other;
+        return accountCounter == accountNumber;
     }
 
 
