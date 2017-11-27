@@ -1,81 +1,92 @@
 import java.awt.event.*;
 import java.io.*;
 
+
 public class BankApp implements ActionListener {
 	private BankGUI gui;
 	private BankAccount account;
+	
+	//added
 	File file = new File("BankAccountInfo.txt");
+	boolean fileExist = file.exists();
+	BufferedWriter bw;
+	
 	PrintWriter pw;
-	boolean action = true;
+	
 	public BankApp() {
+		account = new BankAccount(new Customer("test",1));
+		gui = new BankGUI(this);
+		gui.pack();
+		gui.setVisible(true);
+		
 		
 		try {
-			account = new BankAccount(new Customer("test",1));
-			gui = new BankGUI(this);
-			gui.pack();
-			gui.setVisible(true);
+			fileCreator();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+	}
+	
+	
+	
+	//added this
+	public void fileCreator() throws IOException {
+		
+		if(fileExist) {
+			BufferedReader br = new BufferedReader(new FileReader("BankAccountInfo.txt"));
+			
+		}
+		else {
+			file.createNewFile();
+		}
+	}
+	
+	public void fileWriter() throws IOException {
+		bw = new BufferedWriter(new PrintWriter(file));
+		bw.write("Balance: " + account.getBalance());
+		bw.newLine();
+		bw.write("Name: " + account.getAccountHolder().getName());
+		bw.newLine();
+		bw.write("ID#: " + account.getAccountHolder().getID());
+		bw.newLine();
+		bw.close();
+	}
+
+	
+	public void actionPerformed(ActionEvent event){
+		try {
+			if (event.getActionCommand().equals("deposit")){
+				double amount = Double.parseDouble(gui.getAmount());
+				account.deposit(amount);
+				//added
+				fileWriter();
+			} else if (event.getActionCommand().equals("withdraw")){
+				double amount = Double.parseDouble(gui.getAmount());
+				try {
+					account.withdraw(amount);
+					//added
+					fileWriter();
+				} catch (InsufficientFundsException ife) {
+					gui.setError("Insufficient Funds in Account");
+				}
+			}
+			double balance = account.getBalance();
+			gui.clear();
+			gui.setBalance("" + balance);
+		}
+	
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 	}
 	
-	public void actionPerformed(ActionEvent event){
-		if (event.getActionCommand().equals("deposit")){
-			double amount = Double.parseDouble(gui.getAmount());
-			account.deposit(amount);
-			//added this
-			try {
-				fileCreator();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} else if (event.getActionCommand().equals("withdraw")){
-			double amount = Double.parseDouble(gui.getAmount());
-			
-			//added this, withdrawl doesnt work.
-			try {
-				fileCreator();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-			try {
-				account.withdraw(amount);
-			} catch (InsufficientFundsException ife) {
-				gui.setError("Insufficient Funds in Account");
-			}
-		}
-		double balance = account.getBalance();
-		gui.clear();
-		gui.setBalance("" + balance);
-	}
-	
-	//added this
-	public void fileCreator() throws IOException {
-		
-		if(!file.exists()) {
-			file.createNewFile();
-		}
-		else {
-			pw = new PrintWriter(file);
-			pw.println("Balance: " + account.getBalance());
-			pw.println("Name: " + account.getAccountHolder().getName());
-			pw.println("ID#: " + account.getAccountHolder().getID());
-			pw.close();
-		}
-
-	}
-
-	
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
             	BankApp app = new BankApp();
             }
         });
-    }
-	
-
+    }   
 }
