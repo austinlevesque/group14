@@ -23,6 +23,7 @@ public class BankApp implements ActionListener {
 		variablesToSet();
 		account = new BankAccount(balanceToSet,new Customer(nameToSet,idToSet));
 		gui = new BankGUI(this);
+		gui.setBalance(list.get(1));
 		gui.pack();
 		gui.setVisible(true);		
 		
