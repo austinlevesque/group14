@@ -19,7 +19,12 @@ public class BankApp implements ActionListener {
 	PrintWriter pw;
 	
 	public BankApp() {
-		openFile();
+		try {
+			fileCreator();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		variablesToSet();
 		account = new BankAccount(balanceToSet,new Customer(nameToSet,idToSet));
 		gui = new BankGUI(this);
@@ -27,12 +32,7 @@ public class BankApp implements ActionListener {
 		gui.pack();
 		gui.setVisible(true);		
 		
-		try {
-			fileCreator();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		/*openFile();
 		variablesToSet();
 		System.out.println(list);
@@ -42,14 +42,6 @@ public class BankApp implements ActionListener {
 		*/
 	}
 	
-	public void openFile() {
-		try {
-			x = new Scanner(new File ("BankAccountInfo.txt"));
-		}
-		catch(Exception e) {
-			System.out.println("there is no file that exists with that name");
-		}
-	}
 	
 	public void variablesToSet() {
 		while(x.hasNext()) {
@@ -65,8 +57,7 @@ public class BankApp implements ActionListener {
 	public void fileCreator() throws IOException {
 		
 		if(fileExist) {
-			BufferedReader br = new BufferedReader(new FileReader("BankAccountInfo.txt"));
-			
+			x = new Scanner(new File ("BankAccountInfo.txt"));
 		}
 		else {
 			file.createNewFile();
