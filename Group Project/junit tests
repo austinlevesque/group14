@@ -1,0 +1,62 @@
+	@Test
+	public void test_moveUp_SetsYCoord() {
+		Point p = new Point(40, 40);
+		p.moveUp(1);
+		assertEquals("Y-Coordinate should be set to ", 39, p.getYCoord());
+	}
+
+	@Test
+	public void test_moveDown_SetsYCoord() {
+		Point p = new Point(40, 40);
+		p.moveDown(1);
+		assertEquals("Y-Coordinate should be set to ", 41, p.getYCoord());
+	}
+
+	@Test
+	public void test_moveRight_SetsXCoord() {
+		Point p = new Point(40, 40);
+		p.moveRight(1);
+		assertEquals("X-Coordinate should be set to ", 41, p.getXCoord());
+	}
+
+	@Test
+	public void test_moveLeft_SetsXCoord() {
+		Point p = new Point(40, 40);
+		p.moveLeft(1);
+		assertEquals("X-Coordinate should be set to ", 39, p.getXCoord());
+	}
+
+	@Test
+	public void test_moveDir_WhenDirIsDown() {
+		Point p = new Point(40,40);
+		Snake s = new Snake(p, 10);
+		s.moveDir(1);
+		assertEquals("Y-Coordinate should be set ", 41, s.getTopLeft().getYCoord());
+	}
+	
+	@Test
+	public void test_moveDir_WhenDirIsUp() {
+		Point p = new Point(40,40);
+		Snake s = new Snake(p, 10);
+		s.setDir("up");
+		s.moveDir(1);
+		assertEquals("Y-Coordinate should be set ", 39, s.getTopLeft().getYCoord());
+	}
+	
+	@Test
+	public void test_moveDir_WhenDirIsRight() {
+		Point p = new Point(40,40);
+		Snake s = new Snake(p, 10);
+		s.setDir("right");
+		s.moveDir(1);
+		assertEquals("X-Coordinate should be set ", 41, s.getTopLeft().getXCoord());
+	}
+	
+	@Test
+	public void test_moveDir_WhenDirIsLeft() {
+		Point p = new Point(40,40);
+		Snake s = new Snake(p, 10);
+		s.setDir("left");
+		s.moveDir(1);
+		assertEquals("X-Coordinate should be set ", 39, s.getTopLeft().getXCoord());
+	}
