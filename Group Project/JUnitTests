@@ -1,0 +1,195 @@
+import static org.junit.Assert.*;
+
+import gameObjects.*;
+import move.*;
+import org.junit.*;
+
+public class SnakeTest {
+
+	@Test
+	public void test_setXCoord_ValueLargerThanMax() {
+		Point p = new Point(2000, 200);
+		p.setXCoord(2000);
+		assertEquals("X-Coordinate should be set to minimum value", 8, p.getXCoord());
+	}
+
+	@Test
+	public void test_setXCoord_ValueSmallerThanMin() {
+		Point p = new Point(0, 200);
+		p.setXCoord(0);
+		assertEquals("X-Coordinate should be set to minimum value", 788, p.getXCoord());
+	}
+
+	@Test
+	public void test_setYCoord_ValueLargerThanMax() {
+		Point p = new Point(200, 2000);
+		p.setYCoord(2000);
+		assertEquals("Y-Coordinate should be set to minimum value", 30, p.getYCoord());
+	}
+
+	@Test
+	public void test_setYCoord_ValueSmallerThanMin() {
+		Point p = new Point(200, 0);
+		p.setYCoord(0);
+		assertEquals("Y-Coordinate should be set to minimum value", 780, p.getYCoord());
+	}
+
+	@Test
+	public void test_foodBoolean_FoodLocationIsSnakeLocation() {
+		Food l = new Food(new Point(0, 0), 15);
+		assertTrue("Strings are equal.  Method should return true", l.foodBoolean("", ""));
+	}
+
+	@Test
+	public void test_foodBoolean_FoodLocationIsNotSnakeLocation() {
+		Food l = new Food(new Point(40, 40), 15);
+		assertFalse("Strings are not equal.  Method should return false", l.foodBoolean("it's", "different"));
+	}
+
+	@Test
+	public void test_newLoc_PointIsDifferent() {
+		Food l = new Food(new Point(40, 40), 15);
+		assertNotSame("A new point should have been generated when newLoc was called.", l.newLoc(26), l.newLoc(26));
+	}
+
+	@Test
+	public void test_setScore_NegativeScore() {
+		Point p1 = new Point(8, 30);
+		Snake aSnake = new Snake(p1, 15);
+		aSnake.setScore(-10);
+		assertNotSame("Score cannot be negative.", -10, aSnake.getScore());
+	}
+
+	@Test
+	public void test_setScore_ValidScore() {
+		Point p1 = new Point(8, 30);
+		Snake aSnake = new Snake(p1, 15);
+		aSnake.setScore(10);
+		assertEquals("Score entered is valid.  Score should be 10.", 10, aSnake.getScore());
+	}
+
+	@Test
+	public void test_setSize_InvalidSize() {
+		Point p1 = new Point(8, 30);
+		Snake aSnake = new Snake(p1, 15);
+		aSnake.setSize(-10);
+		assertNotSame("Size cannot be negative.", -10, aSnake.getSize());
+	}
+
+	@Test
+	public void test_setSize_ValidSize() {
+		Point p1 = new Point(8, 30);
+		Snake aSnake = new Snake(p1, 15);
+		aSnake.setSize(10);
+		assertEquals("Size is valid. Size should be 10", 10, aSnake.getSize());
+	}
+
+	@Test
+	public void test_getLoc_SamePoints() {
+		Point p1 = new Point(8, 30);
+		Snake aSnake = new Snake(p1, 15);
+		assertEquals("Points should be equal.", "(" + 8 + "," + 30 + ")", aSnake.getLoc(p1));
+	}
+
+	@Test
+	public void test_getLoc_DifferentPoints() {
+		Point p1 = new Point(10, 30);
+		Snake aSnake = new Snake(p1, 15);
+		assertNotSame("Points should be different.", "(" + 8 + "," + 30 + ")", aSnake.getLoc(p1));
+	}
+
+	@Test
+	public void test_setXCoord_ValidXValue() {
+		Point p = new Point(200, 200);
+		p.setXCoord(300);
+		assertEquals("X-Coordinate should be changed to 300.", 300, p.getXCoord());
+	}
+
+	@Test
+	public void test_setYCoord_ValidYValue() {
+		Point p = new Point(200, 200);
+		p.setYCoord(50);
+		assertEquals("Y-Coordinate should be set to 50", 50, p.getYCoord());
+	}
+	
+	@Test
+	public void test_getDir_DirectionIsTheSame() {
+		Point p = new Point(5, 30);
+		Snake s = new Snake(p, 20);
+		s.setDir("up");
+		assertEquals("Strings should be equal", "up",s.getDir());
+	}
+	
+	@Test
+	public void test_setDir_CorrectInput() {
+		Point p = new Point(2, 40);
+		Snake s = new Snake(p, 3);
+		s.setDir("down");
+		s.setDir("arsenal");
+		assertNotSame("setting direction that isnt: up, down, left, right.", "down", s.getDir());
+	}
+
+	@Test
+	public void test_moveUp_SetsYCoord() {
+		Point p = new Point(40, 40);
+		p.moveUp(1);
+		assertEquals("Y-Coordinate should be set to ", 39, p.getYCoord());
+	}
+
+	@Test
+	public void test_moveDown_SetsYCoord() {
+		Point p = new Point(40, 40);
+		p.moveDown(1);
+		assertEquals("Y-Coordinate should be set to ", 41, p.getYCoord());
+	}
+
+	@Test
+	public void test_moveRight_SetsXCoord() {
+		Point p = new Point(40, 40);
+		p.moveRight(1);
+		assertEquals("X-Coordinate should be set to ", 41, p.getXCoord());
+	}
+
+	@Test
+	public void test_moveLeft_SetsXCoord() {
+		Point p = new Point(40, 40);
+		p.moveLeft(1);
+		assertEquals("X-Coordinate should be set to ", 39, p.getXCoord());
+	}
+
+	@Test
+	public void test_moveDir_WhenDirIsDown() {
+		Point p = new Point(40,40);
+		Snake s = new Snake(p, 10);
+		s.moveDir(1);
+		assertEquals("Y-Coordinate should be set ", 41, s.getTopLeft().getYCoord());
+	}
+	
+	@Test
+	public void test_moveDir_WhenDirIsUp() {
+		Point p = new Point(40,40);
+		Snake s = new Snake(p, 10);
+		s.setDir("up");
+		s.moveDir(1);
+		assertEquals("Y-Coordinate should be set ", 39, s.getTopLeft().getYCoord());
+	}
+	
+	@Test
+	public void test_moveDir_WhenDirIsRight() {
+		Point p = new Point(40,40);
+		Snake s = new Snake(p, 10);
+		s.setDir("right");
+		s.moveDir(1);
+		assertEquals("X-Coordinate should be set ", 41, s.getTopLeft().getXCoord());
+	}
+	
+	@Test
+	public void test_moveDir_WhenDirIsLeft() {
+		Point p = new Point(40,40);
+		Snake s = new Snake(p, 10);
+		s.setDir("left");
+		s.moveDir(1);
+		assertEquals("X-Coordinate should be set ", 39, s.getTopLeft().getXCoord());
+	}
+
+}
