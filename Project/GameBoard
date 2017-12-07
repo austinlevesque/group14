@@ -1,0 +1,73 @@
+package gameobjects;
+import fileio.*;
+import move.Point;
+
+public class GameBoard {
+
+	private static final int SHAPE_SIZE = 15;
+	private Point p1;
+	private Point p2;
+	private Point p3;
+	private Snake aSnake;
+	private Snake bSnake;
+	private Food aFood;
+	
+
+	public void guiUpdateSnake() {
+		aSnake.updateTail(p1.getXCoord(), p1.getYCoord());
+		bSnake.updateTail(p3.getXCoord(), p3.getYCoord());
+		aSnake.moveDir(30);
+		bSnake.moveDir(30);
+		if (aSnake.getTailStrings().contains(aSnake.getLoc(p1))) {
+			System.out.println("Game over");
+			HighScoreManager.writeScore();
+			resetGame();
+		}
+		if (bSnake.getTailStrings().contains(bSnake.getLoc(p3))) {
+			System.out.println("Game over");
+			HighScoreManager.writeScore();
+			resetGame();
+		}
+		if (aSnake.getTailStrings().contains(bSnake.getLoc(p3))) {
+			System.out.println("Game over");
+			HighScoreManager.writeScore();
+			resetGame();
+			//player2 crashes into player1
+		}
+		if (bSnake.getTailStrings().contains(aSnake.getLoc(p1))) {
+			System.out.println("Game over");
+			HighScoreManager.writeScore();
+			resetGame();
+			//player1 crashes into player2
+		}
+		if (aSnake.getLoc(aSnake.getTopLeft()).equals(aFood.getLoc(aFood.getTopLeft()))) {
+			aSnake.setScore(aSnake.getScore() + 1);
+			aFood = new Food(aFood.newLoc(26), 15);
+		}
+		if (bSnake.getLoc(bSnake.getTopLeft()).equals(aFood.getLoc(aFood.getTopLeft()))) {
+			bSnake.setScore(bSnake.getScore() + 1);
+			aFood = new Food(aFood.newLoc(26), 15);
+		}
+	}
+	
+	public void resetGame() {
+		p1 = new Point(8, 30);
+		p2 = new Point(98, 120);
+		p3 = new Point(788, 780);
+		aSnake = new Snake(p1, SHAPE_SIZE);
+		bSnake = new Snake(p3, SHAPE_SIZE);
+		aFood = new Food(p2, SHAPE_SIZE);
+	}
+
+	public Snake getSnakeA() {
+		return aSnake;
+	}
+
+	public Snake getSnakeB() {
+		return bSnake;
+	}
+
+	public Food getFood() {
+		return aFood;
+	}
+}
