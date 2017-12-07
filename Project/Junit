@@ -5,6 +5,7 @@ import org.junit.*;
 
 import gameobjects.*;
 
+
 public class SnakeTest {
 
 	@Test
@@ -117,6 +118,7 @@ public class SnakeTest {
 	public void test_getDir_DirectionIsTheSame() {
 		Point p = new Point(5, 30);
 		Snake s = new Snake(p, 20);
+		s.setDir("left");
 		s.setDir("up");
 		assertEquals("Strings should be equal", "up",s.getDir());
 	}
@@ -132,10 +134,48 @@ public class SnakeTest {
 	
 	@Test
 	public void test_setDir_InitialIncorrectInput() {
-		Point p = new Point(2, 3);
-		Snake s = new Snake(p,5);
-		s.setDir("spurssuck");
-		assertEquals("the intitial set direction is ivalid so the default direction should be down", "down", s.getDir());
+		Point p = new Point(2, 40);
+		Snake s = new Snake(p, 3);
+		s.setDir("RIPharambe");
+		assertEquals("default direction for snakes should be down", "down", s.getDir());
+	}
+	
+	@Test
+	public void test_setDir_MovingInOppDirRight() {
+		Point p = new Point(2, 40);
+		Snake s = new Snake(p, 3);
+		s.setDir("right");
+		s.setDir("left");
+		assertEquals("Player should not be allowed to move in the opposite direction", "right", s.getDir());
+	}
+	
+	@Test
+	public void test_setDir_MovingInOppDirLeft() {
+		Point p = new Point(2, 40);
+		Snake s = new Snake(p, 3);
+		s.setDir("left");
+		s.setDir("right");
+		assertEquals("Player should not be allowed to move in the opposite direction", "left", s.getDir());
+	}
+	
+	@Test
+	public void test_setDir_MovingInOppDirUp() {
+		Point p = new Point(2, 40);
+		Snake s = new Snake(p, 3);
+		s.setDir("left");
+		s.setDir("up");
+		s.setDir("down");
+		assertEquals("Player should not be allowed to move in the opposite direction", "up", s.getDir());
+	}
+	
+	@Test
+	public void test_setDir_MovingInOppDirDown() {
+		Point p = new Point(2, 40);
+		Snake s = new Snake(p, 3);
+		s.setDir("left");
+		s.setDir("down");
+		s.setDir("up");
+		assertEquals("Player should not be allowed to move in the opposite direction", "down", s.getDir());
 	}
 
 	@Test
@@ -178,6 +218,7 @@ public class SnakeTest {
 	public void test_moveDir_WhenDirIsUp() {
 		Point p = new Point(40,40);
 		Snake s = new Snake(p, 10);
+		s.setDir("left");
 		s.setDir("up");
 		s.moveDir(1);
 		assertEquals("Y-Coordinate should be set ", 39, s.getTopLeft().getYCoord());
