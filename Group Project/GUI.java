@@ -139,24 +139,16 @@ public class GUI extends JFrame implements ActionListener, KeyListener {
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_A:
-			if(!board.getSnakeA().getDir().equals("right")) {
-				board.getSnakeA().setDir("left");
-			}
+			board.getSnakeA().setDir("left");
 			break;
 		case KeyEvent.VK_D:
-			if(!board.getSnakeA().getDir().equals("left")) {
-				board.getSnakeA().setDir("right");
-			}
+			board.getSnakeA().setDir("right");
 			break;
 		case KeyEvent.VK_W:
-			if(!board.getSnakeA().getDir().equals("down")) {
-				board.getSnakeA().setDir("up");
-			}
+			board.getSnakeA().setDir("up");
 			break;
 		case KeyEvent.VK_S:
-			if(!board.getSnakeA().getDir().equals("up")) {
-				board.getSnakeA().setDir("down");
-			}
+			board.getSnakeA().setDir("down");
 			break;
 		case KeyEvent.VK_LEFT:
 			board.getSnakeB().setDir("left");
