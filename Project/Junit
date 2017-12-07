@@ -241,5 +241,29 @@ public class SnakeTest {
 		s.moveDir(1);
 		assertEquals("X-Coordinate should be set ", 39, s.getTopLeft().getXCoord());
 	}
-
+	
+	@Test
+	public void test_updateTail_UpdateTailAllListsSizeIsZeroTail() {
+		Point p = new Point(20, 40);
+		Snake s = new Snake(p, 5);
+		s.updateTail(5, 5);
+		assertEquals("Tail list length should be zero",0, s.getTail().size());
+	}
+	
+	@Test
+	public void test_updateTail_UpdateTailAllListsSizeIsZeroTailSnakes() {
+		Point p = new Point(20, 40);
+		Snake s = new Snake(p, 5);
+		s.updateTail(5, 5);
+		assertEquals("TailSnakes list length should be zero",0, s.getTailSnakes().size());
+	}
+	
+	@Test
+	public void test_updateTail_UpdateTailAllListsSizeIsZeroTailStrings() {
+		Point p = new Point(20, 40);
+		Snake s = new Snake(p, 5);
+		s.updateTail(5, 5);
+		assertEquals("TailStrings list length should be zero",0, s.getTailStrings().size());
+	}
+	
 }
