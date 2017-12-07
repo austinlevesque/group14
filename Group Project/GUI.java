@@ -33,6 +33,7 @@ public class GUI extends JFrame implements ActionListener, KeyListener {
 	private Font c = new Font("Comic Sans", Font.BOLD, 30);
 	private JLabel aScoreLabel = new JLabel("<html><u>Player 1</u><br>Score: 0<html>");
 	private JLabel bScoreLabel = new JLabel("<html><u>Player 2</u><br>Score: 0<html>");
+	private JLabel highscore = new JLabel("<html><u>High Score</u><br>Score: 0</html>");
 	private JButton closeGameBtn = new JButton("Close to Main Menu");
 	TextField text = new TextField(30);
 
@@ -51,7 +52,7 @@ public class GUI extends JFrame implements ActionListener, KeyListener {
 	 */
 
 	public GUI(int color1, int color2, int color3) {
-		super("Snake");
+		super("Battlesnakes");
 		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
@@ -66,17 +67,21 @@ public class GUI extends JFrame implements ActionListener, KeyListener {
 		requestFocusInWindow();
 
 		if (color1 <= 100 || color2 <= 100 || color3 <= 1) {
+			highscore.setForeground(Color.WHITE);
 			aScoreLabel.setForeground(Color.WHITE);
 			bScoreLabel.setForeground(Color.WHITE);
 		}
+		highscore.setFont(f);
 		aScoreLabel.setFont(f);
 		bScoreLabel.setFont(f);
+		highscore.setBounds(900, 410, 900, 150);
 		aScoreLabel.setBounds(900, 10, 900, 150);
 		bScoreLabel.setBounds(900, 200, 900, 150);
 		closeGameBtn.setFont(c);
 		closeGameBtn.setBounds(825, 710, 400, 60);
 		closeGameBtn.addActionListener(this);
 		closeGameBtn.setFocusable(false);
+		add(highscore);	
 		add(closeGameBtn);
 		add(aScoreLabel);
 		add(bScoreLabel);
@@ -127,6 +132,10 @@ public class GUI extends JFrame implements ActionListener, KeyListener {
 		for (Snake s : board.getSnakeB().getTailSnakes()) {
 			s.draw(canvas);
 		}
+	}
+	
+	public static void disposeMethod() {
+		faceWindow.dispose();
 	}
 
 	/**
@@ -218,3 +227,4 @@ public class GUI extends JFrame implements ActionListener, KeyListener {
 
 
 }
+
